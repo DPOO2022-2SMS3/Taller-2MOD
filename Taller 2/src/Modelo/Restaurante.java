@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Restaurante 
@@ -67,17 +68,20 @@ public class Restaurante
     	br.close();
     }
 
-    private void cargarCombos(String archivoCombos,) 
+    private void cargarCombos(String archivoCombos) throws FileNotFoundException, IOException
     {
-    	Map<String, > combos = new HashMap<String, Integer>();
+    	List<String> combo = new ArrayList<>();
+    	Map<String, String> combos = new HashMap<String, String>();
     	BufferedReader br = new BufferedReader(new FileReader(archivoCombos));
-    	
-    	String[] combos = linea.split(";");
-		String nombreMenu = partes[0];
-		int precioMenu = Integer.parseInt(partes[1]);
-		menu.put(nombreMenu, precioMenu);
-    	
-    	while ()
+    	String linea = br.readLine();
+    	linea = br.readLine();
+    	while (linea != null)
+    	{	
+    		combo.add(linea);
+    		String[] partes = linea.split(";");
+    		String nombreCombo = partes[0];
+    		combos.put(nombreCombo, linea);
+    	}
     	
     	
     }
