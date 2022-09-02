@@ -26,6 +26,7 @@ public class Ingrediente {
 	//Falta asosiacion de Restaurante hacia Ingredientes y agregados/eliminados 
 	//desde ProductoAjustado
 	
+	private int id;
 	
 	// ************************************************************************
 	// Constructores
@@ -35,19 +36,19 @@ public class Ingrediente {
 	/**
 	 * Construye un nuevo ingrediente e inicializa sus 
 	 * atributos con la información de los parámetros. 
+	 * @param id 
 	 */
-	public Ingrediente(String nombre, int costoAdicional) 
+	public Ingrediente(String nombre, int costoAdicional, int id) 
 	{
 		this.nombre = nombre;
 		this.costoAdicional = costoAdicional;
+		this.id = id;
 	}
 	
 	
 	// ************************************************************************
 	// Métodos para consultar los atributos
 	// ************************************************************************
-
-
 	/**
 	 * Consulta el nombre 
 	 * 

@@ -4,6 +4,14 @@ public class ProductoMenu
 {
 	private String nombre;
 	private int precioBase;
+	private int id;
+	
+	public ProductoMenu(String nombre, int precioBase, int id) 
+	{
+		this.nombre = nombre;
+		this.precioBase = precioBase;
+		this.setId(id);
+	}
 	
 	public String getNombre() {
 		return nombre;
@@ -22,6 +30,14 @@ public class ProductoMenu
 	public String generarTextoFactura()
 	{
 		return "";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 

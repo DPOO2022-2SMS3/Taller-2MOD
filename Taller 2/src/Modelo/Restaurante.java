@@ -71,40 +71,63 @@ public class Restaurante
     	}
     	 return elIngrediente;
 	}
+    
+    public static ProductoMenu getProductos(ArrayList<ProductoMenu> productos, String nombreProducto)
+    {
+    	ProductoMenu elProducto = null;
+    	
+    	for (int i = productos.size(); i>= 0 && elProducto == null; i--)
+    	{
+	    	 ProductoMenu unProducto = productos.get(i);
+	    	 if (unProducto.getNombre() == nombreProducto)
+	    	 {
+	    		 elProducto = unProducto;
+    	     }
+    	 
+    	}
+    	 return elProducto;
+	}
+    
+    public static Combo getCombos(ArrayList<Combo> combos, String nombreCombo)
+    {
+    	Combo elCombo = null;
+    	
+    	for (int i = combos.size(); i>= 0 && elCombo == null; i--)
+    	{
+	    	 Combo unCombo = combos.get(i);
+	    	 if (unCombo.getNombre() == nombreCombo)
+	    	 {
+	    		 elCombo = unCombo;
+    	     }
+    	 
+    	}
+    	 return elCombo;
+	}
 
 
 
-	public void cargarInformacionRestaurante() 
+	public void cargarInformacionRestaurante() throws FileNotFoundException, IOException 
     {
     	String archivoMenu = "menu.txt";
     	String archivoIngredientes = "ingredientes.txt";
     	String archivoCombos = "combos.txt";
     	
-    	try {
-			cargarMenu(archivoMenu);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	cargarIngredientes(archivoIngredientes);
-    	try {
-			cargarCombos(archivoCombos);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ArrayList<Ingrediente> ingredientesList = cargarIngredientes(archivoIngredientes);    	
+    	ArrayList<ProductoMenu> productosList = cargarMenu(archivoMenu);
+		ArrayList<Combo> combosList = cargarCombos(archivoCombos, productosList);
+		
+		Map<String, ArrayList<>> mapa = new HashMap<String, ArrayList<>>();
+	
     	
     			
     }
 
-    private void cargarIngredientes(String archivoIngredientes) throws IOException
+    private ArrayList<Ingrediente> cargarIngredientes(String archivoIngredientes) throws IOException
     {
     	BufferedReader br = new BufferedReader(new FileReader(archivoIngredientes));
     	String linea = br.readLine();
     	ArrayList<Ingrediente> ingredientes = new ArrayList<>();
+    	int id = 200;
     	
     	while (linea != null)
     	{
@@ -116,7 +139,8 @@ public class Restaurante
     		
     		if (ElIngrediente == null)
     		{
-    			ElIngrediente = new Ingrediente(nombreIngrediente, precio);
+    			id = id + 1;
+    			ElIngrediente = new Ingrediente(nombreIngrediente, precio, id);
     			ingredientes.add(ElIngrediente);
     		}
     		
@@ -124,47 +148,99 @@ public class Restaurante
     	}
     	
     	br.close();
+		return ingredientes;
     	
     }
+    
 
-    private void cargarMenu(String archivoMenu) throws FileNotFoundException, IOException
+    private ArrayList<ProductoMenu> cargarMenu(String archivoMenu) throws FileNotFoundException, IOException
     {
-    	
-    	Map<String, Integer> menu = new HashMap<String, Integer>();
     	BufferedReader br = new BufferedReader(new FileReader(archivoMenu));
-    	
     	String linea = br.readLine();
-    	linea = br.readLine();
+    	ArrayList<ProductoMenu> productos = new ArrayList<>();
+    	int id = 100;
     	
     	while (linea != null)
     	{
     		String[] partes = linea.split(";");
-    		String nombreMenu = partes[0];
-    		int precioMenu = Integer.parseInt(partes[1]);
-    		menu.put(nombreMenu, precioMenu);
+    		String nombreProducto = partes[0]; 
+    		int precio = Integer.parseInt(partes[1]);
+    		
+    		ProductoMenu ElProducto = getProductos(productos, nombreProducto);
+    		
+    		if (ElProducto == null)
+    		{
+    			id = id + 1;
+    			ElProducto = new ProductoMenu(nombreProducto, precio, id);
+    			productos.add(ElProducto);
+    		}
+    		
+    		linea = br.readLine();
     	}
-    	
     	br.close();
+		return productos;
     }
 
-    private void cargarCombos(String archivoCombos) throws FileNotFoundException, IOException
+    private ArrayList<Combo> cargarCombos(String archivoCombos, ArrayList<ProductoMenu> productos) throws FileNotFoundException, IOException
     {
-    	List<String> comidaCombo = new ArrayList<>();
-    	Map<String, List<String>> combos = new HashMap<String, List<String>>();
     	BufferedReader br = new BufferedReader(new FileReader(archivoCombos));
     	String linea = br.readLine();
-    	linea = br.readLine();
+    	ArrayList<Combo> combos = new ArrayList<>();
+    	int id = 300;
+    	
     	while (linea != null)
-    	{	
+    	{
     		String[] partes = linea.split(";");
-    		comidaCombo;
-    		String nombreCombo = partes[0];
-    		combos.put(nombreCombo, linea);
+    		String nombreCombo = partes[0]; 
+    		String descuento1 = partes[1];
+    		descuento1 = descuento1.replace("%", "");
+    		double descuento = Double.parseDouble(descuento1);
+    		
+    		Combo ElCombo = getCombos(combos, nombreCombo);
+    		
+    		if (ElCombo == null)
+    		{
+    			ArrayList<ProductoMenu> itemsCombo = new ArrayList<>();
+        		String nombreHamburguesa = partes[2];
+        		String nombrePapas = partes[3];
+        		String nombreBebida = partes[4];
+        		ProductoMenu hamburguesa = null;
+        		ProductoMenu papas = null;
+        		ProductoMenu bebida = null;
+        		
+        		
+        		for (int i = productos.size() - 1; i >= 0 && (hamburguesa == null || papas == null || bebida == null); i--)
+        		{
+        			ProductoMenu unProducto = productos.get(i);
+        			if (unProducto.getNombre().equals(nombreHamburguesa))
+        			{
+        				hamburguesa = unProducto;
+        			}
+        			else if (unProducto.getNombre().equals(nombrePapas))
+        	    	{
+        	    		papas = unProducto;
+        	   		}
+        			else if (unProducto.getNombre().equals(nombreBebida))
+        	    	{
+        	    		bebida = unProducto;
+        	   		}
+        		} 
+        		
+        		itemsCombo.add(hamburguesa);
+        		itemsCombo.add(papas);
+        		itemsCombo.add(bebida);
+        		
+    			
+    			id = id + 1;
+    			ElCombo = new Combo(nombreCombo, descuento, id, itemsCombo);
+    			combos.add(ElCombo);
+    		}
+    		
+    		linea = br.readLine();
     	}
-    	
-    	
+    	br.close();
+		return combos;
     }
-
 	
 
 }

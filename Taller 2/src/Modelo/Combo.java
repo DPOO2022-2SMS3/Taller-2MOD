@@ -1,9 +1,21 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public class Combo 
 {
 	private double descuento;
 	private String nombreCombo;
+	private int id;
+	private ArrayList<ProductoMenu> productos;
+	
+	public Combo(String nombre, double descuento, int id, ArrayList<ProductoMenu> productos) 
+	{
+		this.nombreCombo = nombre;
+		this.descuento = descuento;
+		this.id = id;
+		this.productos = productos;
+	}
 	
 	
 	public double getDescuento() {
@@ -39,6 +51,24 @@ public class Combo
 	public String getNombre()
 	{
 		return "";
+	}
+	public ArrayList<ProductoMenu> getProductos() {
+		return productos;
+	}
+	public void setProductos(ArrayList<ProductoMenu> productos) {
+		this.productos = productos;
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }
