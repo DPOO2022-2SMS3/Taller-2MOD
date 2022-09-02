@@ -12,24 +12,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Modelo.Ingrediente;
+
 public class Restaurante 
 {
-	private Pedido pedido;
+	
+	private Ingrediente ingredientes;
 	
 	public Restaurante() 
 	{
 	}
+	
+	
 	
 	public void iniciarPedido(String nombreCliente, String direccionCliente) 
     {
 
     }
 
-    public void agregarProducto(Producto nuevoItem) {
-		pedido.agregarProducto(nuevoItem);
-	}
-
-	public void cerrarYGuardarPedido() 
+    public void cerrarYGuardarPedido() 
     {
 
     }
@@ -44,12 +45,36 @@ public class Restaurante
 
     }
 
-    public ArrayList<Ingrediente> getIngredientes()
-    {
-		return null;
-    }
+    /**
+     * Busca un ingrediente en la lista de ingredientes por el nombre
+     * 
+     * Si no encuentra el ingrediente retorna null
+     * 
+     * @param nombreIngrediente
+     * @param ingredientes
+     * @param precio 
+     */
+    
 
-    public void cargarInformacionRestaurante() 
+    public static Ingrediente getIngredientes(ArrayList<Ingrediente> ingredientes, String nombreIngrediente)
+    {
+    	Ingrediente elIngrediente = null;
+    	
+    	for (int i = ingredientes.size(); i>= 0 && elIngrediente == null; i--)
+    	{
+	    	 Ingrediente unIngrediente = ingredientes.get(i);
+	    	 if (unIngrediente.getNombre() == nombreIngrediente)
+	    	 {
+	    		 elIngrediente = unIngrediente;
+    	     }
+    	 
+    	}
+    	 return elIngrediente;
+	}
+
+
+
+	public void cargarInformacionRestaurante() 
     {
     	String archivoMenu = "menu.txt";
     	String archivoIngredientes = "ingredientes.txt";
@@ -57,7 +82,6 @@ public class Restaurante
     	
     	try {
 			cargarMenu(archivoMenu);
-			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,15 +100,31 @@ public class Restaurante
     			
     }
 
-    private void cargarIngredientes(String archivoIngredientes)
+    private void cargarIngredientes(String archivoIngredientes) throws IOException
     {
     	BufferedReader br = new BufferedReader(new FileReader(archivoIngredientes));
     	String linea = br.readLine();
+    	ArrayList<Ingrediente> ingredientes = new ArrayList<>();
     	
-    	for (linea != null)
+    	while (linea != null)
     	{
+    		String[] partes = linea.split(";");
+    		String nombreIngrediente = partes[0]; 
+    		int precio = Integer.parseInt(partes[1]);
     		
+    		Ingrediente ElIngrediente = getIngredientes(ingredientes, nombreIngrediente);
+    		
+    		if (ElIngrediente == null)
+    		{
+    			ElIngrediente = new Ingrediente(nombreIngrediente, precio);
+    			ingredientes.add(ElIngrediente);
+    		}
+    		
+    		linea = br.readLine();
     	}
+    	
+    	br.close();
+    	
     }
 
     private void cargarMenu(String archivoMenu) throws FileNotFoundException, IOException
