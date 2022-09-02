@@ -13,11 +13,13 @@ import java.util.List;
 import java.util.Map;
 
 import Modelo.Ingrediente;
+import Modelo.Pedido;
 
 public class Restaurante 
 {
 	
 	private Ingrediente ingredientes;
+	private Pedido pedido;
 	
 	public Restaurante() 
 	{
@@ -27,7 +29,8 @@ public class Restaurante
 	
 	public void iniciarPedido(String nombreCliente, String direccionCliente) 
     {
-
+		Pedido pedidoAct = new Pedido(nombreCliente, direccionCliente);
+		
     }
 
     public void cerrarYGuardarPedido() 
@@ -42,6 +45,7 @@ public class Restaurante
 
     public ArrayList<Producto> getMenuBase()
     {
+		return null;
 
     }
 
@@ -116,10 +120,6 @@ public class Restaurante
     	ArrayList<ProductoMenu> productosList = cargarMenu(archivoMenu);
 		ArrayList<Combo> combosList = cargarCombos(archivoCombos, productosList);
 		
-		Map<String, ArrayList<>> mapa = new HashMap<String, ArrayList<>>();
-	
-    	
-    			
     }
 
     private ArrayList<Ingrediente> cargarIngredientes(String archivoIngredientes) throws IOException

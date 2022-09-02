@@ -14,6 +14,10 @@ public class Pedido {
 
     public Pedido(String nombreCliente, String direccionCliente) 
     {
+    	this.nombreCliente = nombreCliente;
+		this.direccionCliente = direccionCliente;
+		this.idPedido = 0;
+		this.numeroPedidos = 0; 
 
     }
 
@@ -24,6 +28,7 @@ public class Pedido {
 
     public void agregarProducto(Producto nuevoItem)
     {
+    	
 
     }
 
@@ -58,6 +63,11 @@ public class Pedido {
 
         
     }
+
+	public Pedido Pedido(String nombreCliente2, String direccionCliente2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
 
