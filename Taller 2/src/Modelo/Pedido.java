@@ -17,7 +17,7 @@ public class Pedido {
     	this.nombreCliente = nombreCliente;
 		this.direccionCliente = direccionCliente;
 		this.idPedido = 0;
-		this.numeroPedidos = 0; 
+		this.numeroPedidos = 0000; 
 
     }
 
