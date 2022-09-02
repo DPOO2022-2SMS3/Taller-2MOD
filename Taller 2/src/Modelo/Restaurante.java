@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 public class Restaurante 
 {
+	private Pedido pedido;
 	
 	public Restaurante() 
 	{
@@ -23,7 +25,11 @@ public class Restaurante
 
     }
 
-    public void cerrarYGuardarPedido() 
+    public void agregarProducto(Producto nuevoItem) {
+		pedido.agregarProducto(nuevoItem);
+	}
+
+	public void cerrarYGuardarPedido() 
     {
 
     }
@@ -51,6 +57,7 @@ public class Restaurante
     	
     	try {
 			cargarMenu(archivoMenu);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
