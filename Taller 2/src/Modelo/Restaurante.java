@@ -13,6 +13,11 @@ import java.util.Map;
 
 public class Restaurante 
 {
+	
+	public Restaurante() 
+	{
+	}
+	
 	public void iniciarPedido(String nombreCliente, String direccionCliente) 
     {
 
@@ -41,11 +46,38 @@ public class Restaurante
     public void cargarInformacionRestaurante() 
     {
     	String archivoMenu = "menu.txt";
+    	String archivoIngredientes = "ingredientes.txt";
+    	String archivoCombos = "combos.txt";
+    	
+    	try {
+			cargarMenu(archivoMenu);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	cargarIngredientes(archivoIngredientes);
+    	try {
+			cargarCombos(archivoCombos);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    			
     }
 
-    private void cargarIngredientes(File archivoIngredientes)
+    private void cargarIngredientes(String archivoIngredientes)
     {
+    	BufferedReader br = new BufferedReader(new FileReader(archivoIngredientes));
+    	String linea = br.readLine();
     	
+    	for (linea != null)
+    	{
+    		
+    	}
     }
 
     private void cargarMenu(String archivoMenu) throws FileNotFoundException, IOException
@@ -70,15 +102,15 @@ public class Restaurante
 
     private void cargarCombos(String archivoCombos) throws FileNotFoundException, IOException
     {
-    	List<String> combo = new ArrayList<>();
-    	Map<String, String> combos = new HashMap<String, String>();
+    	List<String> comidaCombo = new ArrayList<>();
+    	Map<String, List<String>> combos = new HashMap<String, List<String>>();
     	BufferedReader br = new BufferedReader(new FileReader(archivoCombos));
     	String linea = br.readLine();
     	linea = br.readLine();
     	while (linea != null)
     	{	
-    		combo.add(linea);
     		String[] partes = linea.split(";");
+    		comidaCombo;
     		String nombreCombo = partes[0];
     		combos.put(nombreCombo, linea);
     	}
