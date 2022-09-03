@@ -18,8 +18,11 @@ import Modelo.Pedido;
 public class Restaurante 
 {
 	
-	private Ingrediente ingredientes;
-	private Pedido pedido;
+	private ArrayList<Ingrediente> ingredientesList;
+	private ArrayList<ProductoMenu> productosList;
+	private ArrayList<Combo> combosList;
+	
+	
 	
 	public Restaurante() 
 	{
@@ -116,13 +119,13 @@ public class Restaurante
     	String archivoIngredientes = "ingredientes.txt";
     	String archivoCombos = "combos.txt";
     	
-		ArrayList<Ingrediente> ingredientesList = cargarIngredientes(archivoIngredientes);    	
-    	ArrayList<ProductoMenu> productosList = cargarMenu(archivoMenu);
-		ArrayList<Combo> combosList = cargarCombos(archivoCombos, productosList);
+		cargarIngredientes(archivoIngredientes);    	
+    	cargarMenu(archivoMenu);
+		cargarCombos(archivoCombos, productosList);
 		
     }
 
-    private ArrayList<Ingrediente> cargarIngredientes(String archivoIngredientes) throws IOException
+    private void cargarIngredientes(String archivoIngredientes) throws IOException
     {
     	BufferedReader br = new BufferedReader(new FileReader(archivoIngredientes));
     	String linea = br.readLine();
@@ -148,12 +151,11 @@ public class Restaurante
     	}
     	
     	br.close();
-		return ingredientes;
-    	
+    	setIngredientesList(ingredientes);    	
     }
     
 
-    private ArrayList<ProductoMenu> cargarMenu(String archivoMenu) throws FileNotFoundException, IOException
+    private void cargarMenu(String archivoMenu) throws FileNotFoundException, IOException
     {
     	BufferedReader br = new BufferedReader(new FileReader(archivoMenu));
     	String linea = br.readLine();
@@ -178,10 +180,10 @@ public class Restaurante
     		linea = br.readLine();
     	}
     	br.close();
-		return productos;
+		setProductosList(productos);
     }
 
-    private ArrayList<Combo> cargarCombos(String archivoCombos, ArrayList<ProductoMenu> productos) throws FileNotFoundException, IOException
+    private void cargarCombos(String archivoCombos, ArrayList<ProductoMenu> productos) throws FileNotFoundException, IOException
     {
     	BufferedReader br = new BufferedReader(new FileReader(archivoCombos));
     	String linea = br.readLine();
@@ -239,8 +241,44 @@ public class Restaurante
     		linea = br.readLine();
     	}
     	br.close();
-		return combos;
+		setCombosList(combos);
     }
+
+
+
+	public ArrayList<Ingrediente> getIngredientesList() {
+		return ingredientesList;
+	}
+
+
+
+	public void setIngredientesList(ArrayList<Ingrediente> ingredientesList) {
+		this.ingredientesList = ingredientesList;
+	}
+
+
+
+	public ArrayList<ProductoMenu> getProductosList() {
+		return productosList;
+	}
+
+
+
+	public void setProductosList(ArrayList<ProductoMenu> productosList) {
+		this.productosList = productosList;
+	}
+
+
+
+	public ArrayList<Combo> getCombosList() {
+		return combosList;
+	}
+
+
+
+	public void setCombosList(ArrayList<Combo> combosList) {
+		this.combosList = combosList;
+	}
 	
 
 }

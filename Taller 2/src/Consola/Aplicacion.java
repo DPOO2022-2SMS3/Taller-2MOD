@@ -18,8 +18,13 @@ public class Aplicacion {
 		boolean continuar = true;
 		while (continuar)
 		{
-			
-//			restaurante.cargarInformacionRestaurante();
+			System.out.println("1. Mostrar el menú");
+			System.out.println("2. Iniciar un nuevo pedido");
+			System.out.println("3. Agregar un elemento a un pedido");
+			System.out.println("4. Cerrar un pedido y guardar la factura");
+			System.out.println("5. Consultar la información de un pedido dado su id");
+
+			restaurante.cargarInformacionRestaurante();
 			int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
 			if (opcion_seleccionada == 1)
 			{
@@ -32,7 +37,8 @@ public class Aplicacion {
 				String direccionCliente = input("Porfavor ingrese su direccion");
 				restaurante.iniciarPedido(nombreCliente, direccionCliente);
 			}
-			if (opcion_seleccionada == 3) {
+			if (opcion_seleccionada == 3)
+			
 			{
 				
 					
