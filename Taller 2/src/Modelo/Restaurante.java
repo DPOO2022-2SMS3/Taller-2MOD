@@ -17,12 +17,11 @@ import Modelo.Pedido;
 
 public class Restaurante 
 {
+	private Pedido pedidoAct;
 	
 	private ArrayList<Ingrediente> ingredientesList;
 	private ArrayList<ProductoMenu> productosList;
 	private ArrayList<Combo> combosList;
-	
-	
 	
 	public Restaurante() 
 	{
@@ -33,6 +32,8 @@ public class Restaurante
 	public void iniciarPedido(String nombreCliente, String direccionCliente) 
     {
 		Pedido pedidoAct = new Pedido(nombreCliente, direccionCliente);
+		setPedidoAct(pedidoAct);
+		
 		
     }
 
@@ -202,7 +203,7 @@ public class Restaurante
     		
     		if (ElCombo == null)
     		{
-    			ArrayList<ProductoMenu> itemsCombo = new ArrayList<>();
+    			ArrayList<Producto> itemsCombo = new ArrayList<>();
         		String nombreHamburguesa = partes[2];
         		String nombrePapas = partes[3];
         		String nombreBebida = partes[4];
@@ -228,14 +229,14 @@ public class Restaurante
         	   		}
         		} 
         		
-        		itemsCombo.add(hamburguesa);
-        		itemsCombo.add(papas);
-        		itemsCombo.add(bebida);
         		
-    			
     			id = id + 1;
     			ElCombo = new Combo(nombreCombo, descuento, id, itemsCombo);
     			combos.add(ElCombo);
+    			
+    			ElCombo.agregarItemACombo(hamburguesa);
+        		ElCombo.agregarItemACombo(papas);
+        		ElCombo.agregarItemACombo(bebida);
     		}
     		
     		linea = br.readLine();
@@ -279,6 +280,62 @@ public class Restaurante
 	public void setCombosList(ArrayList<Combo> combosList) {
 		this.combosList = combosList;
 	}
+
+
+
+	public Pedido getPedidoAct() {
+		return pedidoAct;
+	}
+
+
+
+	public void setPedidoAct(Pedido pedidoAct) {
+		this.pedidoAct = pedidoAct;
+	}
+	
+	public void ejecutarAgregarProducto(int idProducto)
+	{
+		Producto producto = null;
+		if (idProducto > 100 && idProducto < 200)
+		{
+			for (int i = this.productosList.size() - 1; i >= 0 && producto == null; i--)
+    		{
+    			ProductoMenu unProducto = productosList.get(i);
+    			if (unProducto.getId() == idProducto)
+    			{
+    				producto = unProducto;
+    			}
+    		}
+		}
+		
+		else if (idProducto > 200 && idProducto < 300)
+		{
+			for (int i = this.ingredientesList.size() - 1; i >= 0 && producto == null; i--)
+    		{
+    			Ingrediente unIngrediente = ingredientesList.get(i);
+    			if (unIngrediente.getId() == idProducto)
+    			{
+    				producto = unIngrediente;
+    			}
+    		}
+		}
+		
+		else if (idProducto > 300)
+		{
+			for (int i = this.combosList.size() - 1; i >= 0 && producto == null; i--)
+    		{
+    			Combo unCombo = combosList.get(i);
+    			if (unCombo.getId() == idProducto)
+    			{
+    				producto = unCombo;
+    			}
+    		}
+		}
+
+		pedidoAct.agregarProducto(producto);
+	
+	}
+
 	
 
 }

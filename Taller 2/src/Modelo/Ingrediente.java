@@ -6,7 +6,8 @@ package Modelo;
  *agregar o eliminar de algún elemento en un pedido.
  */
 
-public class Ingrediente {
+public class Ingrediente
+{
 
 	// ************************************************************************
 	// Atributos
@@ -42,7 +43,7 @@ public class Ingrediente {
 	{
 		this.nombre = nombre;
 		this.costoAdicional = costoAdicional;
-		this.id = id;
+		this.setId(id);
 	}
 	
 	
@@ -68,6 +69,16 @@ public class Ingrediente {
 	public int getCostoAdicional() 
 	{
 		return costoAdicional;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

@@ -1,6 +1,6 @@
 package Modelo;
 
-public class ProductoMenu 
+public class ProductoMenu implements Producto
 {
 	private String nombre;
 	private int precioBase;
@@ -19,7 +19,7 @@ public class ProductoMenu
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public int getPrecioBase() {
+	public int getPrecio() {
 		return precioBase;
 	}
 	public void setPrecioBase(int precioBase) {

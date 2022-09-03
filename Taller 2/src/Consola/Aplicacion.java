@@ -1,6 +1,7 @@
 package Consola;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -11,7 +12,7 @@ public class Aplicacion {
 	
 	private Restaurante restaurante;
 	
-	public void ejecutarAplicacion()
+	public void ejecutarAplicacion() throws FileNotFoundException, IOException
 	{
 		System.out.println("Nuestra Carta \n");
 
@@ -31,22 +32,30 @@ public class Aplicacion {
 				mostrarMenu();
 			}
 				
-			if (opcion_seleccionada == 2) 
+			else if (opcion_seleccionada == 2) 
 			{
 				String nombreCliente = input("Porfavor ingrese el nombre del cliente");
 				String direccionCliente = input("Porfavor ingrese su direccion");
 				restaurante.iniciarPedido(nombreCliente, direccionCliente);
 			}
-			if (opcion_seleccionada == 3)
-			
+			else if (opcion_seleccionada == 3)
 			{
-				
+				int idProducto = Integer.parseInt(input("Ingrese el código del producto que desea agregar: "));
+		
+				int ajuste = Integer.parseInt(input("¿Ajustar Producto?\n \t1. Sí\n\t2. No"));
+				if (ajuste == 1)
+				{
+					int idIngrediente = Integer.parseInt(input("Ingrese el código del ingrediente que desea modificar: "));
 					
+					
+				}
+				else if (ajuste == 2)
+				{
+					restaurante.ejecutarAgregarProducto(idProducto);
+				}
 			}
-				
-			}
-				
-				
+			
+			else
 			{
 				System.out.println("Saliendo de la aplicación ...");
 				continuar = false;
@@ -60,9 +69,9 @@ public class Aplicacion {
 				System.out.println("Por favor seleccione una opción válida.");
 			}
 		}
+	}
 			
-			
-		}
+	
 	public void mostrarMenu() 
 	{
 		System.out.println("1. MENÚ\n");
@@ -127,11 +136,13 @@ public class Aplicacion {
 	}
 
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws FileNotFoundException, IOException
 	{
 		Aplicacion consola = new Aplicacion();
 		consola.ejecutarAplicacion();
 	}
+	
+	
 	
 
 }

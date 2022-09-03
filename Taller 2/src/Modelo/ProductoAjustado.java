@@ -5,7 +5,8 @@ package Modelo;
  * a un pedido: un ProductoAjustado tiene un prducto base y una serie de ingredientes 
  * que se agregan o se eliminan a este producto
  */
-public class ProductoAjustado {
+public class ProductoAjustado implements Producto
+{
 	
 	
 	// ************************************************************************

@@ -2,14 +2,14 @@ package Modelo;
 
 import java.util.ArrayList;
 
-public class Combo 
+public class Combo implements Producto
 {
 	private double descuento;
 	private String nombreCombo;
 	private int id;
-	private ArrayList<ProductoMenu> productos;
+	private ArrayList<Producto> productos;
 	
-	public Combo(String nombre, double descuento, int id, ArrayList<ProductoMenu> productos) 
+	public Combo(String nombre, double descuento, int id, ArrayList<Producto> productos) 
 	{
 		this.nombreCombo = nombre;
 		this.descuento = descuento;
@@ -24,9 +24,7 @@ public class Combo
 	public void setDescuento(double descuento) {
 		this.descuento = descuento;
 	}
-	public String getNombreCombo() {
-		return nombreCombo;
-	}
+
 	public void setNombreCombo(String nombreCombo) {
 		this.nombreCombo = nombreCombo;
 	}
@@ -38,8 +36,9 @@ public class Combo
 //	}
 	public void agregarItemACombo(Producto itemCombo)
 	{
-		
+		productos.add(itemCombo);
 	}
+	
 	public int getPrecio()
 	{
 		return 0;	
@@ -50,12 +49,12 @@ public class Combo
 	}
 	public String getNombre()
 	{
-		return "";
+		return nombreCombo;
 	}
-	public ArrayList<ProductoMenu> getProductos() {
+	public ArrayList<Producto> getProductos() {
 		return productos;
 	}
-	public void setProductos(ArrayList<ProductoMenu> productos) {
+	public void setProductos(ArrayList<Producto> productos) {
 		this.productos = productos;
 	}
 
