@@ -1,6 +1,7 @@
 package Consola;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +11,7 @@ import Modelo.Restaurante;
 
 public class Aplicacion {
 	
-	private Restaurante restaurante;
+	private Restaurante restaurante = new Restaurante();
 	
 	public void ejecutarAplicacion() throws FileNotFoundException, IOException
 	{
@@ -19,6 +20,8 @@ public class Aplicacion {
 		boolean continuar = true;
 		while (continuar)
 		{
+			File directory = new File("./");
+			System.out.println(directory.getPath());
 			System.out.println("1. Mostrar el menú");
 			System.out.println("2. Iniciar un nuevo pedido");
 			System.out.println("3. Agregar un elemento a un pedido");
@@ -42,12 +45,19 @@ public class Aplicacion {
 			{
 				int idProducto = Integer.parseInt(input("Ingrese el código del producto que desea agregar: "));
 		
-				int ajuste = Integer.parseInt(input("¿Ajustar Producto?\n \t1. Sí\n\t2. No"));
+				int ajuste = Integer.parseInt(input("¿Modificar Producto?\n \t1. Sí\n\t2. No"));
 				if (ajuste == 1)
 				{
 					int idIngrediente = Integer.parseInt(input("Ingrese el código del ingrediente que desea modificar: "));
-					
-					
+					int tipo = Integer.parseInt(input("1. Agregar Ingrediente\n2. Eliminar Ingrediente"));
+					if (tipo == 1)
+					{
+						//ejecutar agregar ingrediente Producto Ajustado
+					}
+					else if (tipo == 2)
+					{
+						//ejecutar eliminar ingrediente Producto Ajustado
+					}
 				}
 				else if (ajuste == 2)
 				{

@@ -18,23 +18,26 @@ import Modelo.Pedido;
 public class Restaurante 
 {
 	private Pedido pedidoAct;
+	private ProductoAjustado productoAct;
+	private int contadorPedidos;
 	
 	private ArrayList<Ingrediente> ingredientesList;
 	private ArrayList<ProductoMenu> productosList;
 	private ArrayList<Combo> combosList;
 	
+	
 	public Restaurante() 
 	{
+		this.contadorPedidos = 0;
 	}
 	
 	
 	
 	public void iniciarPedido(String nombreCliente, String direccionCliente) 
     {
-		Pedido pedidoAct = new Pedido(nombreCliente, direccionCliente);
+		contadorPedidos = contadorPedidos + 1;
+		Pedido pedidoAct = new Pedido(nombreCliente, direccionCliente, contadorPedidos);
 		setPedidoAct(pedidoAct);
-		
-		
     }
 
     public void cerrarYGuardarPedido() 
@@ -42,14 +45,9 @@ public class Restaurante
 
     }
 
-    public Pedido getPedidoEnCurso() 
-    {
-        return null;
-    }
-
     public ArrayList<Producto> getMenuBase()
     {
-		return null;
+		
 
     }
 
@@ -116,9 +114,9 @@ public class Restaurante
 
 	public void cargarInformacionRestaurante() throws FileNotFoundException, IOException 
     {
-    	String archivoMenu = "menu.txt";
-    	String archivoIngredientes = "ingredientes.txt";
-    	String archivoCombos = "combos.txt";
+    	String archivoMenu = "Data/menu.txt";
+    	String archivoIngredientes = "Data/ingredientes.txt";
+    	String archivoCombos = "Data/combos.txt";
     	
 		cargarIngredientes(archivoIngredientes);    	
     	cargarMenu(archivoMenu);
@@ -130,6 +128,7 @@ public class Restaurante
     {
     	BufferedReader br = new BufferedReader(new FileReader(archivoIngredientes));
     	String linea = br.readLine();
+    	System.out.println(linea);
     	ArrayList<Ingrediente> ingredientes = new ArrayList<>();
     	int id = 200;
     	
@@ -138,6 +137,9 @@ public class Restaurante
     		String[] partes = linea.split(";");
     		String nombreIngrediente = partes[0]; 
     		int precio = Integer.parseInt(partes[1]);
+    		
+    		System.out.println(ingredientes);
+    		System.out.println(nombreIngrediente);
     		
     		Ingrediente ElIngrediente = getIngredientes(ingredientes, nombreIngrediente);
     		
@@ -275,19 +277,14 @@ public class Restaurante
 		return combosList;
 	}
 
-
-
 	public void setCombosList(ArrayList<Combo> combosList) {
 		this.combosList = combosList;
 	}
 
-
-
-	public Pedido getPedidoAct() {
+	public Pedido getPedidoEnCurso()
+	{
 		return pedidoAct;
 	}
-
-
 
 	public void setPedidoAct(Pedido pedidoAct) {
 		this.pedidoAct = pedidoAct;
@@ -295,6 +292,13 @@ public class Restaurante
 	
 	public void ejecutarAgregarProducto(int idProducto)
 	{
+		Producto producto = getProducto(idProducto);
+		pedidoAct.agregarProducto(producto);
+	}
+	
+	public Producto getProducto(int idProducto)
+	{
+		// TODO Separar en funciones distintas
 		Producto producto = null;
 		if (idProducto > 100 && idProducto < 200)
 		{
@@ -331,11 +335,32 @@ public class Restaurante
     			}
     		}
 		}
-
-		pedidoAct.agregarProducto(producto);
-	
+		
+		return producto;
 	}
-
+	
+//	public void ejecutarAgregarProductoAjustado(int idProducto, int x4bool, int idIngrediente)
+//	{
+//		if (productoAct.getId() != idProducto)
+//		{
+//			Producto productoBase = getProducto(idProducto);
+//			productoAct = new ProductoAjustado(productoBase);
+//		}
+//		Producto ingrediente = getProducto(idIngrediente);
+//		
+//		if (x4bool == 1)
+//		{
+//		
+//			//Agrega
+//		}
+//		else if (x4bool == 2)
+//		{
+//			//Elimina
+//		}
+//		
+//		
+//		pedidoAct.agregarProducto(productoAct);
+//	}
 	
 
 }

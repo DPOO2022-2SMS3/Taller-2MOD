@@ -17,4 +17,6 @@ public interface Producto
 		return "";
 	}
 
+	public int getId();
+
 }

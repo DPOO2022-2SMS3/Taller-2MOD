@@ -1,35 +1,36 @@
 package Modelo;
 
 import java.io.File;
+import java.util.Random;
 
 public class Pedido {
-
+	
+	// Atributos
     private int numeroPedidos;
-
     private int idPedido;
-
     private String nombreCliente;
-
     private String direccionCliente;
-
-    public Pedido(String nombreCliente, String direccionCliente) 
+    
+    // Constructor
+    public Pedido(String nombreCliente, String direccionCliente, int contadorPedidos) 
     {
+    	Random rand = new Random();
     	this.nombreCliente = nombreCliente;
 		this.direccionCliente = direccionCliente;
-		this.idPedido = 0;
-		this.numeroPedidos = 0000; 
-
+		this.idPedido = rand.nextInt(99999);
+		this.numeroPedidos = contadorPedidos;
     }
-
-    public int getIdPedido() 
-    {
-        return idPedido;
-    }
-
     public void agregarProducto(Producto nuevoItem)
     {
     	
 
+    }
+    
+    // Consultores y Modificadores
+
+    public int getIdPedido() 
+    {
+        return idPedido;
     }
 
     private int getPrecioNetoPedido() 
@@ -63,11 +64,6 @@ public class Pedido {
 
         
     }
-
-	public Pedido Pedido(String nombreCliente2, String direccionCliente2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
 

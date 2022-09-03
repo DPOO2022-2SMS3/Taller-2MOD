@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 /*
  * La clase ProductoAjustado representa un producto que se ajustó cuando se agregó 
  * a un pedido: un ProductoAjustado tiene un prducto base y una serie de ingredientes 
@@ -17,7 +19,11 @@ public class ProductoAjustado implements Producto
 	/*
 	 * Todavia no se hacer asociaciones. No se si de esta manera es la manera correacta
 	 */
-	private ProductoMenu ProductoMenu; 
+	private Producto productoBase; 
+	
+	private ArrayList<Ingrediente> ingredientesEliminados;
+	
+	private ArrayList<Ingrediente> ingredientesAgregados;
 	
 	/*
 	 * Supongo que es el nombre de los ingredientes
@@ -34,6 +40,7 @@ public class ProductoAjustado implements Producto
 	 */
 	private String TextoFactura;
 	
+	
 	//Falta asosiaciones agregados y eliminados hacia Ingredientes y base 1 hacia ProductoMenu
 	
 	// ************************************************************************
@@ -43,9 +50,10 @@ public class ProductoAjustado implements Producto
 	/*
 	 * Crea el producto ajustado en base al menu base que se le entregó por paramentros
 	 */
-	public ProductoAjustado(ProductoMenu base)
+	public ProductoAjustado(Producto productoBase)
 	{
-		this.ProductoMenu = base;
+		this.productoBase = productoBase;
+		
 	}
 
 	
@@ -69,4 +77,30 @@ public class ProductoAjustado implements Producto
 	{
 		return TextoFactura;
 	}
+	public ArrayList<Ingrediente> getIngredientesEliminados() {
+		return ingredientesEliminados;
+	}
+
+
+	public void setIngredientesEliminados(ArrayList<Ingrediente> ingredientesEliminados) {
+		this.ingredientesEliminados = ingredientesEliminados;
+	}
+
+
+	public ArrayList<Ingrediente> getIngredientesAgregados() {
+		return ingredientesAgregados;
+	}
+
+
+	public void setIngredientesAgregados(ArrayList<Ingrediente> ingredientesAgregados) {
+		this.ingredientesAgregados = ingredientesAgregados;
+	}
+
+
+	@Override
+	public int getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

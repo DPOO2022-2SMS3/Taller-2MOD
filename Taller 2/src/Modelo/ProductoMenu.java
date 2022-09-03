@@ -2,9 +2,13 @@ package Modelo;
 
 public class ProductoMenu implements Producto
 {
+	// Atributos
+	
 	private String nombre;
 	private int precioBase;
 	private int id;
+	
+	// Constructor
 	
 	public ProductoMenu(String nombre, int precioBase, int id) 
 	{
@@ -13,32 +17,34 @@ public class ProductoMenu implements Producto
 		this.setId(id);
 	}
 	
+	// Consultores y Modificadores
+	
 	public String getNombre() {
 		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 	public int getPrecio() {
 		return precioBase;
 	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	public void setPrecioBase(int precioBase) {
 		this.precioBase = precioBase;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	
 	public String generarTextoFactura()
 	{
-		return "";
+		return (this.getNombre() + "\n\t" + this.getPrecio());
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-
 }
