@@ -71,7 +71,7 @@ public class Pedido {
     	for (int i = this.productos.size() - 1; i >= 0; i--)
 		{
 			Producto unProducto = productos.get(i);
-			textoProductos = textoProductos + "\t+ " + unProducto.getNombre() + "\t" + unProducto.getPrecio()+ "\n";
+			textoProductos = textoProductos + unProducto.generarTextoFactura();
 		}
     	
         String TextoFactura = "HAMBURGUESAS MACASE\n\nCliente: " + this.nombreCliente + 

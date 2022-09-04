@@ -47,10 +47,13 @@ public class Combo implements Producto
 		{
 			ProductoMenu unProducto = productos.get(i);
 			total = total + unProducto.getPrecio();
+			
 		}
-		total = (total * this.descuento / 100) + total;
+		total = total - (total * this.descuento / 100);
+		
 		return total;
 	}
+	
 	public String generarTextoFactura()
 	{
 		return (this.getNombre() + "\n\t" + this.getPrecio());

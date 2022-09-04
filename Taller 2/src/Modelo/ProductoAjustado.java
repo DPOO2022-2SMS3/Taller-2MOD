@@ -28,7 +28,6 @@ public class ProductoAjustado implements Producto
 	/*
 	 * Supongo que es el nombre de los ingredientes
 	 */
-	private String nombre;
 	
 	/*
 	 * Tambien voy a suponer que es el precio de los ingredientes
@@ -53,7 +52,8 @@ public class ProductoAjustado implements Producto
 	public ProductoAjustado(ProductoMenu productoBase)
 	{
 		this.productoBase = productoBase;
-		
+		this.ingredientesAgregados = new ArrayList<>();
+		this.ingredientesEliminados = new ArrayList<>();
 	}
 
 	
@@ -63,7 +63,7 @@ public class ProductoAjustado implements Producto
 	
 	public String getNombre() 
 	{
-		return nombre;
+		return productoBase.getNombre();
 	}
 
 
@@ -81,17 +81,17 @@ public class ProductoAjustado implements Producto
 
 	public String generarTextoFactura() 
 	{
-		String texto = "";
-		texto = texto + productoBase.getNombre();
+		String texto = "\t";
+		texto = texto + productoBase.getNombre() + "\t" + productoBase.getPrecio() + "\n";
 		for (int i = this.ingredientesAgregados.size() - 1; i >= 0; i--)
 		{
 			Ingrediente unIngrediente = ingredientesAgregados.get(i);
-			texto = texto + "\t+ " + unIngrediente.getNombre() + "\t" + unIngrediente.getCostoAdicional()+ "\n";
+			texto = texto + "\t\t+ " + unIngrediente.getNombre() + "\t" + unIngrediente.getCostoAdicional()+ "\n";
 		}
 		for (int i = this.ingredientesEliminados.size() - 1; i >= 0; i--)
 		{
 			Ingrediente unIngrediente = ingredientesEliminados.get(i);
-			texto = texto + "\t- " + unIngrediente.getNombre() + "\n";
+			texto = texto + "\t\t- " + unIngrediente.getNombre() + "\n";
 		}
 		return texto;
 	}

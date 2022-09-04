@@ -298,7 +298,6 @@ public class Restaurante
 	{
 		
 		Producto producto = getProducto(idProducto);
-		System.out.println(producto);
 		pedidoAct.agregarProducto(producto);
 	}
 	

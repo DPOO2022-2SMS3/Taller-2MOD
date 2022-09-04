@@ -43,33 +43,40 @@ public class Aplicacion {
 			}
 			else if (opcion_seleccionada == 3)
 			{
-				int idProducto = Integer.parseInt(input("Ingrese el código del producto que desea agregar: "));
-		
-				int ajuste = Integer.parseInt(input("¿Modificar Producto?\n \t1. Sí\n\t2. No"));
-				if (ajuste == 1)
+				int idProducto = Integer.parseInt(input("Ingrese el código del producto que desea agregar"));
+				if (idProducto > 100 && idProducto < 123)
 				{
-					boolean modificaciones = true;
-					while (modificaciones)
+					int ajuste = Integer.parseInt(input("¿Modificar Producto?\n \t1. Sí\n\t2. No"));
+					if (ajuste == 1)
 					{
-						int idIngrediente = Integer.parseInt(input("Ingrese el código del ingrediente que desea modificar: "));
-						int tipo = Integer.parseInt(input("1. Agregar Ingrediente\n2. Eliminar Ingrediente"));
-						if (tipo == 1)
+						boolean modificaciones = true;
+						while (modificaciones)
 						{
-							restaurante.ejecutarPrepararProductoAjustado(idProducto, tipo, idIngrediente);
+							int idIngrediente = Integer.parseInt(input("Ingrese el código del ingrediente que desea modificar: "));
+							int tipo = Integer.parseInt(input("1. Agregar Ingrediente\n2. Eliminar Ingrediente"));
+							if (tipo == 1)
+							{
+								restaurante.ejecutarPrepararProductoAjustado(idProducto, tipo, idIngrediente);
+							}
+							else if (tipo == 2)
+							{
+								restaurante.ejecutarPrepararProductoAjustado(idProducto, tipo, idIngrediente);
+							}
+							int proseguirmod = Integer.parseInt(input("¿Continuar modificaciones?\n \t1. Sí\n\t2. No"));
+							if (proseguirmod != 1)
+							{
+								modificaciones = false;
+							}
 						}
-						else if (tipo == 2)
-						{
-							restaurante.ejecutarPrepararProductoAjustado(idProducto, tipo, idIngrediente);
-						}
-						int proseguirmod = Integer.parseInt(input("¿Continuar modificaciones?\n \t1. Sí\n\t2. No"));
-						if (proseguirmod != 1)
-						{
-							modificaciones = false;
-						}
+						restaurante.ejecutarAgregarProductoAjustado();
 					}
-					restaurante.ejecutarAgregarProductoAjustado();
+					else if (ajuste == 2)
+					{
+						restaurante.ejecutarAgregarProducto(idProducto);
+					}
+					System.out.println("Producto agregado");
 				}
-				else if (ajuste == 2)
+				else
 				{
 					restaurante.ejecutarAgregarProducto(idProducto);
 				}
@@ -97,6 +104,7 @@ public class Aplicacion {
 			}
 		}
 	}
+	
 			
 	
 	public void mostrarMenu() 
@@ -156,7 +164,7 @@ public class Aplicacion {
 		}
 		catch (IOException e)
 		{
-			System.out.println("Error leyendo de la consola ejejej");
+			System.out.println("Error leyendo de la consola");
 			e.printStackTrace();
 		}
 		return null;
