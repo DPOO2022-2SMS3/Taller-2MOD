@@ -14,9 +14,11 @@ public class Aplicacion {
 	
 	private Restaurante restaurante = new Restaurante();
 	
+	
 	public void ejecutarAplicacion() throws FileNotFoundException, IOException 
 	{
 		System.out.println("Nuestra Carta");
+		Boolean pedido = false;
 
 		boolean continuar = true;
 		while (continuar)
@@ -39,9 +41,10 @@ public class Aplicacion {
 				String nombreCliente = input("Ingrese el nombre del cliente\n");
 				String direccionCliente = input("Ingrese su direccion\n");
 				restaurante.iniciarPedido(nombreCliente, direccionCliente);
+				pedido = true;
 				System.out.println("Pedido iniciado");
 			}
-			else if (opcion_seleccionada == 3)
+			else if (opcion_seleccionada == 3 && pedido==true)
 			{
 				int idProducto = Integer.parseInt(input("Ingrese el código del producto que desea agregar\n"));
 				if (idProducto > 100 && idProducto < 123)
@@ -76,6 +79,8 @@ public class Aplicacion {
 					}
 					System.out.println("Producto agregado");
 				}
+			
+				
 				else if ((idProducto > 200 && idProducto < 216) || (idProducto > 300 && idProducto < 304))
 				{
 					restaurante.ejecutarAgregarProducto(idProducto);
@@ -86,12 +91,18 @@ public class Aplicacion {
 				{
 					System.out.println("Producto inválido");
 				}
-				
 			}
+			
+			else if (opcion_seleccionada == 3 && pedido==false) 
+			{
+				System.out.println("Por favor inicie un pedido");
+			}
+	
 			else if (opcion_seleccionada == 4)
 			{
 				restaurante.cerrarYGuardarPedido();
 				System.out.println("Pedido Cerrado");
+				pedido = false;
 			}
 			else if (opcion_seleccionada == 5)
 			{
