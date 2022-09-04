@@ -25,12 +25,15 @@ public class Restaurante
 	private ArrayList<ProductoMenu> productosList;
 	private ArrayList<Combo> combosList;
 	
+	private Map<Integer, Pedido> pedidos;
+	
 	
 	public Restaurante() 
 	{
 		this.contadorPedidos = 0;
 		ProductoMenu temp = new ProductoMenu(null, 0, 0);
 		this.productoAct = new ProductoAjustado(temp);
+		this.pedidos = new HashMap<>();
 	}
 	
 	
@@ -42,15 +45,10 @@ public class Restaurante
 		setPedidoAct(pedidoAct);
     }
 
-    public void cerrarYGuardarPedido() 
+    public void cerrarYGuardarPedido() throws IOException 
     {
-
-    }
-
-    public ArrayList<Producto> getMenuBase()
-    {
-		return null;
-	
+    	pedidoAct.guardarFactura();
+    	this.pedidos.put(pedidoAct.getIdPedido(), pedidoAct);
     }
 
     /**
@@ -80,7 +78,7 @@ public class Restaurante
     	 return elIngrediente;
 	}
     
-    public static ProductoMenu getProductos(ArrayList<ProductoMenu> productos, String nombreProducto)
+    public static ProductoMenu getMenuBase(ArrayList<ProductoMenu> productos, String nombreProducto)
     {
     	ProductoMenu elProducto = null;
     	
@@ -169,7 +167,7 @@ public class Restaurante
     		String nombreProducto = partes[0]; 
     		int precio = Integer.parseInt(partes[1]);
     		
-    		ProductoMenu ElProducto = getProductos(productos, nombreProducto);
+    		ProductoMenu ElProducto = getMenuBase(productos, nombreProducto);
     		
     		if (ElProducto == null)
     		{
@@ -282,6 +280,13 @@ public class Restaurante
 	public Pedido getPedidoEnCurso()
 	{
 		return pedidoAct;
+	}
+	
+	public String getPedidoxID(int idPedido)
+	{
+		Pedido consulta = this.pedidos.get(idPedido);
+		String info =consulta.generarTextoFactura();
+		return info;
 	}
 
 	public void setPedidoAct(Pedido pedidoAct) {

@@ -73,7 +73,21 @@ public class Aplicacion {
 				{
 					restaurante.ejecutarAgregarProducto(idProducto);
 				}
+				System.out.println("Producto agregado");
+				
 			}
+			else if (opcion_seleccionada == 4)
+			{
+				restaurante.cerrarYGuardarPedido();
+				System.out.println("Pedido Cerrado");
+			}
+			else if (opcion_seleccionada == 5)
+			{
+				int idPedido = Integer.parseInt(input("Ingrese el ID del pedido que desea consultar: "));
+				
+			}
+		
+			
 			
 			else
 			{

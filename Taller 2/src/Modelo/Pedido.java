@@ -63,7 +63,7 @@ public class Pedido {
         return precioTotal;
     }
     
-    private String generarTextoFactura() 
+    protected String generarTextoFactura() 
     {
     	String textoProductos = "";
     	for (int i = this.productos.size() - 1; i >= 0; i--)
