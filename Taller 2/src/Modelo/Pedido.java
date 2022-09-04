@@ -1,6 +1,10 @@
 package Modelo;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Pedido {
@@ -10,6 +14,7 @@ public class Pedido {
     private int idPedido;
     private String nombreCliente;
     private String direccionCliente;
+    private ArrayList<Producto> productos;
     
     // Constructor
     public Pedido(String nombreCliente, String direccionCliente, int contadorPedidos) 
@@ -22,8 +27,7 @@ public class Pedido {
     }
     public void agregarProducto(Producto nuevoItem)
     {
-    	
-
+    	productos.add(nuevoItem);
     }
     
     // Consultores y Modificadores
@@ -35,34 +39,65 @@ public class Pedido {
 
     private int getPrecioNetoPedido() 
     {
-        int precioNeto=0;
-
-        return precioNeto;
+    	int neto = 0;
+    	for (int i = this.productos.size() - 1; i >= 0; i--)
+		{
+			Producto unProducto = productos.get(i);
+			neto = neto + unProducto.getPrecio();
+		}
+    	return neto;
     }
-    private int getPrecioTotalPedido() 
-    {
-        int precioTotal=0;
-
-        return precioTotal;
-    }
+    
     private int getPrecioIVAPedido() 
     {
-        int precioIVA=0;
+        int neto = this.getPrecioNetoPedido();
+        int precioIVA = neto * 19 / 100;
 
         return precioIVA;
     }
+    
+    private int getPrecioTotalPedido() 
+    {
+        int precioTotal = this.getPrecioNetoPedido() +  this.getPrecioIVAPedido();
+
+        return precioTotal;
+    }
+    
     private String generarTextoFactura() 
     {
-        String TextoFactura = null;
+    	String textoProductos = "";
+    	for (int i = this.productos.size() - 1; i >= 0; i--)
+		{
+			Producto unProducto = productos.get(i);
+			textoProductos = textoProductos + "\t+ " + unProducto.getNombre() + "\t" + unProducto.getPrecio()+ "\n";
+		}
+    	
+        String TextoFactura = "HAMBURGUESAS MACASE\n\nCliente: " + this.nombreCliente + 
+        					  "\nDirección cliente: " +  this.direccionCliente +
+        					  "\nID Pedido: " + this.idPedido +
+        					  "\n\n PRODUCTOS\n" + textoProductos +
+        					  "\n\nValor Neto: " + this.getPrecioNetoPedido() + 
+        					  "\nValor IVA (19%): " + this.getPrecioIVAPedido() + 
+        					  "\nTOTAL: " + this.getPrecioTotalPedido();
+        
 
         return TextoFactura;
     }
-
-    public File guardarFactura(File archivo) 
+    
+    public void guardarFactura() throws IOException
     {
-        return archivo;
-
-        
+        String ruta = "Data/" + this.idPedido + ".txt";
+        String contenido = this.generarTextoFactura();
+        File file = new File(ruta);
+            // Si el archivo no existe es creado
+        if (!file.exists()) 
+        {
+           file.createNewFile();
+        }
+        FileWriter fw = new FileWriter(file);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(contenido);
+        bw.close();
     }
 
 }

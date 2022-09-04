@@ -19,7 +19,7 @@ public class ProductoAjustado implements Producto
 	/*
 	 * Todavia no se hacer asociaciones. No se si de esta manera es la manera correacta
 	 */
-	private Producto productoBase; 
+	private ProductoMenu productoBase; 
 	
 	private ArrayList<Ingrediente> ingredientesEliminados;
 	
@@ -50,7 +50,7 @@ public class ProductoAjustado implements Producto
 	/*
 	 * Crea el producto ajustado en base al menu base que se le entregó por paramentros
 	 */
-	public ProductoAjustado(Producto productoBase)
+	public ProductoAjustado(ProductoMenu productoBase)
 	{
 		this.productoBase = productoBase;
 		
@@ -69,14 +69,33 @@ public class ProductoAjustado implements Producto
 
 	public int getPrecio() 
 	{
-		return precio;
+		int total = productoBase.getPrecio();
+		for (int i = this.ingredientesAgregados.size() - 1; i >= 0; i--)
+		{
+			Ingrediente unIngrediente = ingredientesAgregados.get(i);
+			total = total + unIngrediente.getCostoAdicional();
+		}
+		return total;
 	}
 
 
 	public String generarTextoFactura() 
 	{
-		return TextoFactura;
+		String texto = "";
+		texto = texto + productoBase.getNombre();
+		for (int i = this.ingredientesAgregados.size() - 1; i >= 0; i--)
+		{
+			Ingrediente unIngrediente = ingredientesAgregados.get(i);
+			texto = texto + "\t+ " + unIngrediente.getNombre() + "\t" + unIngrediente.getCostoAdicional()+ "\n";
+		}
+		for (int i = this.ingredientesEliminados.size() - 1; i >= 0; i--)
+		{
+			Ingrediente unIngrediente = ingredientesEliminados.get(i);
+			texto = texto + "\t- " + unIngrediente.getNombre() + "\n";
+		}
+		return texto;
 	}
+	
 	public ArrayList<Ingrediente> getIngredientesEliminados() {
 		return ingredientesEliminados;
 	}
@@ -98,9 +117,9 @@ public class ProductoAjustado implements Producto
 
 
 	@Override
-	public int getId() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getId() 
+	{
+		return productoBase.getId();
 	}
 
 }

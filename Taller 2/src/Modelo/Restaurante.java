@@ -29,6 +29,8 @@ public class Restaurante
 	public Restaurante() 
 	{
 		this.contadorPedidos = 0;
+		ProductoMenu temp = new ProductoMenu(null, 0, 0);
+		this.productoAct = new ProductoAjustado(temp);
 	}
 	
 	
@@ -47,8 +49,8 @@ public class Restaurante
 
     public ArrayList<Producto> getMenuBase()
     {
-		
-
+		return null;
+	
     }
 
     /**
@@ -66,15 +68,15 @@ public class Restaurante
     {
     	Ingrediente elIngrediente = null;
     	
-    	for (int i = ingredientes.size(); i>= 0 && elIngrediente == null; i--)
-    	{
+    	for (int i = ingredientes.size()-1; i>= 0 && elIngrediente == null; i--)
+    	{	
 	    	 Ingrediente unIngrediente = ingredientes.get(i);
 	    	 if (unIngrediente.getNombre() == nombreIngrediente)
 	    	 {
 	    		 elIngrediente = unIngrediente;
-    	     }
-    	 
+    	     }		
     	}
+
     	 return elIngrediente;
 	}
     
@@ -82,7 +84,7 @@ public class Restaurante
     {
     	ProductoMenu elProducto = null;
     	
-    	for (int i = productos.size(); i>= 0 && elProducto == null; i--)
+    	for (int i = productos.size()-1; i>= 0 && elProducto == null; i--)
     	{
 	    	 ProductoMenu unProducto = productos.get(i);
 	    	 if (unProducto.getNombre() == nombreProducto)
@@ -98,7 +100,7 @@ public class Restaurante
     {
     	Combo elCombo = null;
     	
-    	for (int i = combos.size(); i>= 0 && elCombo == null; i--)
+    	for (int i = combos.size()-1; i>= 0 && elCombo == null; i--)
     	{
 	    	 Combo unCombo = combos.get(i);
 	    	 if (unCombo.getNombre() == nombreCombo)
@@ -128,7 +130,6 @@ public class Restaurante
     {
     	BufferedReader br = new BufferedReader(new FileReader(archivoIngredientes));
     	String linea = br.readLine();
-    	System.out.println(linea);
     	ArrayList<Ingrediente> ingredientes = new ArrayList<>();
     	int id = 200;
     	
@@ -137,9 +138,6 @@ public class Restaurante
     		String[] partes = linea.split(";");
     		String nombreIngrediente = partes[0]; 
     		int precio = Integer.parseInt(partes[1]);
-    		
-    		System.out.println(ingredientes);
-    		System.out.println(nombreIngrediente);
     		
     		Ingrediente ElIngrediente = getIngredientes(ingredientes, nombreIngrediente);
     		
@@ -199,13 +197,13 @@ public class Restaurante
     		String nombreCombo = partes[0]; 
     		String descuento1 = partes[1];
     		descuento1 = descuento1.replace("%", "");
-    		double descuento = Double.parseDouble(descuento1);
+    		int descuento = Integer.parseInt(descuento1);
     		
     		Combo ElCombo = getCombos(combos, nombreCombo);
     		
     		if (ElCombo == null)
     		{
-    			ArrayList<Producto> itemsCombo = new ArrayList<>();
+    			ArrayList<ProductoMenu> itemsCombo = new ArrayList<>();
         		String nombreHamburguesa = partes[2];
         		String nombrePapas = partes[3];
         		String nombreBebida = partes[4];
@@ -296,23 +294,62 @@ public class Restaurante
 		pedidoAct.agregarProducto(producto);
 	}
 	
+	public void ejecutarAgregarProductoAjustado()
+	{
+		pedidoAct.agregarProducto(productoAct);
+	}
+	
 	public Producto getProducto(int idProducto)
 	{
-		// TODO Separar en funciones distintas
 		Producto producto = null;
-		if (idProducto > 100 && idProducto < 200)
+		if (idProducto > 100 && idProducto < 123)
 		{
-			for (int i = this.productosList.size() - 1; i >= 0 && producto == null; i--)
-    		{
-    			ProductoMenu unProducto = productosList.get(i);
-    			if (unProducto.getId() == idProducto)
-    			{
-    				producto = unProducto;
-    			}
-    		}
+			producto = getProductoMenuxID(idProducto);
 		}
+		else if (idProducto > 300 && idProducto < 304)
+		{
+			producto = getComboxID(idProducto);
+		}
+		return producto;
 		
-		else if (idProducto > 200 && idProducto < 300)
+	}
+	
+	public ProductoMenu getProductoMenuxID(int idProducto)
+	{
+		ProductoMenu producto = null;
+
+		for (int i = this.productosList.size() - 1; i >= 0 && producto == null; i--)
+    	{
+   			ProductoMenu unProducto = productosList.get(i);
+   			if (unProducto.getId() == idProducto)
+   			{
+   				producto = unProducto;
+   			}
+    	}
+		
+		return producto;
+	}
+	
+	public Combo getComboxID(int idProducto)
+	{
+		Combo producto = null;
+
+		for (int i = this.combosList.size() - 1; i >= 0 && producto == null; i--)
+    	{
+   			Combo unCombo = combosList.get(i);
+   			if (unCombo.getId() == idProducto)
+   			{
+   				producto = unCombo;
+   			}
+    	}
+
+		return producto;
+	}
+	
+	public Ingrediente getIngredientexID(int idProducto)
+	{
+		Ingrediente producto = null;
+		if (idProducto > 200 && idProducto < 216)
 		{
 			for (int i = this.ingredientesList.size() - 1; i >= 0 && producto == null; i--)
     		{
@@ -323,44 +360,30 @@ public class Restaurante
     			}
     		}
 		}
-		
-		else if (idProducto > 300)
-		{
-			for (int i = this.combosList.size() - 1; i >= 0 && producto == null; i--)
-    		{
-    			Combo unCombo = combosList.get(i);
-    			if (unCombo.getId() == idProducto)
-    			{
-    				producto = unCombo;
-    			}
-    		}
-		}
-		
 		return producto;
 	}
 	
-//	public void ejecutarAgregarProductoAjustado(int idProducto, int x4bool, int idIngrediente)
-//	{
-//		if (productoAct.getId() != idProducto)
-//		{
-//			Producto productoBase = getProducto(idProducto);
-//			productoAct = new ProductoAjustado(productoBase);
-//		}
-//		Producto ingrediente = getProducto(idIngrediente);
-//		
-//		if (x4bool == 1)
-//		{
-//		
-//			//Agrega
-//		}
-//		else if (x4bool == 2)
-//		{
-//			//Elimina
-//		}
-//		
-//		
-//		pedidoAct.agregarProducto(productoAct);
-//	}
+	public void ejecutarPrepararProductoAjustado(int idProducto, int x4bool, int idIngrediente)
+	{
+		if (productoAct.getId() != idProducto)
+		{
+			ProductoMenu productoBase = getProductoMenuxID(idProducto);
+			productoAct = new ProductoAjustado(productoBase);
+		}
+		Ingrediente ingrediente = getIngredientexID(idIngrediente);
+		
+		if (x4bool == 1)//Agrega
+		{
+			ArrayList<Ingrediente> agregadosList = productoAct.getIngredientesAgregados();
+			agregadosList.add(ingrediente);
+		}
+		else if (x4bool == 2)//Elimina
+		{
+			ArrayList<Ingrediente> eliminadosList = productoAct.getIngredientesEliminados();
+			eliminadosList.add(ingrediente);
+		}
+		
+	}
 	
 
 }

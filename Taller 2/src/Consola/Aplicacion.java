@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.List;
 
 import Modelo.Restaurante;
@@ -13,15 +14,13 @@ public class Aplicacion {
 	
 	private Restaurante restaurante = new Restaurante();
 	
-	public void ejecutarAplicacion() throws FileNotFoundException, IOException
+	public void ejecutarAplicacion() throws FileNotFoundException, IOException 
 	{
 		System.out.println("Nuestra Carta \n");
 
 		boolean continuar = true;
 		while (continuar)
 		{
-			File directory = new File("./");
-			System.out.println(directory.getPath());
 			System.out.println("1. Mostrar el menú");
 			System.out.println("2. Iniciar un nuevo pedido");
 			System.out.println("3. Agregar un elemento a un pedido");
@@ -40,6 +39,7 @@ public class Aplicacion {
 				String nombreCliente = input("Porfavor ingrese el nombre del cliente");
 				String direccionCliente = input("Porfavor ingrese su direccion");
 				restaurante.iniciarPedido(nombreCliente, direccionCliente);
+				System.out.println("¡Su pedido fue iniciado con éxito!");
 			}
 			else if (opcion_seleccionada == 3)
 			{
@@ -48,16 +48,26 @@ public class Aplicacion {
 				int ajuste = Integer.parseInt(input("¿Modificar Producto?\n \t1. Sí\n\t2. No"));
 				if (ajuste == 1)
 				{
-					int idIngrediente = Integer.parseInt(input("Ingrese el código del ingrediente que desea modificar: "));
-					int tipo = Integer.parseInt(input("1. Agregar Ingrediente\n2. Eliminar Ingrediente"));
-					if (tipo == 1)
+					boolean modificaciones = true;
+					while (modificaciones)
 					{
-						//ejecutar agregar ingrediente Producto Ajustado
+						int idIngrediente = Integer.parseInt(input("Ingrese el código del ingrediente que desea modificar: "));
+						int tipo = Integer.parseInt(input("1. Agregar Ingrediente\n2. Eliminar Ingrediente"));
+						if (tipo == 1)
+						{
+							restaurante.ejecutarPrepararProductoAjustado(idProducto, tipo, idIngrediente);
+						}
+						else if (tipo == 2)
+						{
+							restaurante.ejecutarPrepararProductoAjustado(idProducto, tipo, idIngrediente);
+						}
+						int proseguirmod = Integer.parseInt(input("¿Continuar modificaciones?\n \t1. Sí\n\t2. No"));
+						if (proseguirmod != 1)
+						{
+							modificaciones = false;
+						}
 					}
-					else if (tipo == 2)
-					{
-						//ejecutar eliminar ingrediente Producto Ajustado
-					}
+					restaurante.ejecutarAgregarProductoAjustado();
 				}
 				else if (ajuste == 2)
 				{
@@ -69,14 +79,6 @@ public class Aplicacion {
 			{
 				System.out.println("Saliendo de la aplicación ...");
 				continuar = false;
-			}
-			if (restaurante == null)
-			{
-				System.out.println("Para poder ejecutar esta opción primero debe cargar un archivo de atletas.");
-			}
-			else
-			{
-				System.out.println("Por favor seleccione una opción válida.");
 			}
 		}
 	}

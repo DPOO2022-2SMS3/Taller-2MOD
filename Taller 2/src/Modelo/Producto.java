@@ -2,21 +2,8 @@ package Modelo;
 
 public interface Producto 
 {
-	public default int getPrecio()
-	{
-		return 0;
-	}
-	
-	public default String getNombre()
-	{
-		return "";
-	}
-	
-	public default String generarTextoFactura()
-	{
-		return "";
-	}
-
+	public int getPrecio();	
+	public String getNombre();
+	public String generarTextoFactura();
 	public int getId();
-
 }
