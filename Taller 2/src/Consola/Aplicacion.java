@@ -84,7 +84,8 @@ public class Aplicacion {
 			else if (opcion_seleccionada == 5)
 			{
 				int idPedido = Integer.parseInt(input("Ingrese el ID del pedido que desea consultar: "));
-				
+				String texto = restaurante.getPedidoxID(idPedido);
+				System.out.println(texto);
 			}
 		
 			

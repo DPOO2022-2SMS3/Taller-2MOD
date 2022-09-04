@@ -24,9 +24,11 @@ public class Pedido {
 		this.direccionCliente = direccionCliente;
 		this.idPedido = rand.nextInt(99999);
 		this.numeroPedidos = contadorPedidos;
+		this.productos = new ArrayList<>();
     }
     public void agregarProducto(Producto nuevoItem)
     {
+    	
     	productos.add(nuevoItem);
     }
     

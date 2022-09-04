@@ -20,6 +20,7 @@ public class Restaurante
 	private Pedido pedidoAct;
 	private ProductoAjustado productoAct;
 	private int contadorPedidos;
+	private Producto prod;
 	
 	private ArrayList<Ingrediente> ingredientesList;
 	private ArrayList<ProductoMenu> productosList;
@@ -295,7 +296,9 @@ public class Restaurante
 	
 	public void ejecutarAgregarProducto(int idProducto)
 	{
+		
 		Producto producto = getProducto(idProducto);
+		System.out.println(producto);
 		pedidoAct.agregarProducto(producto);
 	}
 	
