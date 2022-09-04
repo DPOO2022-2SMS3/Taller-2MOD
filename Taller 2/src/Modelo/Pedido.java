@@ -71,7 +71,7 @@ public class Pedido {
     	for (int i = this.productos.size() - 1; i >= 0; i--)
 		{
 			Producto unProducto = productos.get(i);
-			textoProductos = textoProductos + unProducto.generarTextoFactura();
+			textoProductos = textoProductos + unProducto.generarTextoFactura() + "\n";
 		}
     	
         String TextoFactura = "HAMBURGUESAS MACASE\n\nCliente: " + this.nombreCliente + 
@@ -88,7 +88,7 @@ public class Pedido {
     
     public void guardarFactura() throws IOException
     {
-        String ruta = "Data/" + this.idPedido + ".txt";
+        String ruta = "Data/Facturas/" + this.idPedido + ".txt";
         String contenido = this.generarTextoFactura();
         File file = new File(ruta);
             // Si el archivo no existe es creado

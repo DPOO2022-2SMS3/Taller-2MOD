@@ -50,6 +50,7 @@ public class Restaurante
     {
     	pedidoAct.guardarFactura();
     	this.pedidos.put(pedidoAct.getIdPedido(), pedidoAct);
+    	pedidoAct = null;
     }
 
     /**

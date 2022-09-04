@@ -16,19 +16,19 @@ public class Aplicacion {
 	
 	public void ejecutarAplicacion() throws FileNotFoundException, IOException 
 	{
-		System.out.println("Nuestra Carta \n");
+		System.out.println("Nuestra Carta");
 
 		boolean continuar = true;
 		while (continuar)
 		{
-			System.out.println("1. Mostrar el menú");
+			System.out.println("\n1. Mostrar el menú");
 			System.out.println("2. Iniciar un nuevo pedido");
 			System.out.println("3. Agregar un elemento a un pedido");
 			System.out.println("4. Cerrar un pedido y guardar la factura");
 			System.out.println("5. Consultar la información de un pedido dado su id");
 
 			restaurante.cargarInformacionRestaurante();
-			int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
+			int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opción\n"));
 			if (opcion_seleccionada == 1)
 			{
 				mostrarMenu();
@@ -36,24 +36,24 @@ public class Aplicacion {
 				
 			else if (opcion_seleccionada == 2) 
 			{
-				String nombreCliente = input("Porfavor ingrese el nombre del cliente");
-				String direccionCliente = input("Porfavor ingrese su direccion");
+				String nombreCliente = input("Ingrese el nombre del cliente\n");
+				String direccionCliente = input("Ingrese su direccion\n");
 				restaurante.iniciarPedido(nombreCliente, direccionCliente);
-				System.out.println("¡Su pedido fue iniciado con éxito!");
+				System.out.println("Pedido iniciado");
 			}
 			else if (opcion_seleccionada == 3)
 			{
-				int idProducto = Integer.parseInt(input("Ingrese el código del producto que desea agregar"));
+				int idProducto = Integer.parseInt(input("Ingrese el código del producto que desea agregar\n"));
 				if (idProducto > 100 && idProducto < 123)
 				{
-					int ajuste = Integer.parseInt(input("¿Modificar Producto?\n \t1. Sí\n\t2. No"));
+					int ajuste = Integer.parseInt(input("¿Modificar Producto?\n \t1. Sí\n\t2. No\n"));
 					if (ajuste == 1)
 					{
 						boolean modificaciones = true;
 						while (modificaciones)
 						{
-							int idIngrediente = Integer.parseInt(input("Ingrese el código del ingrediente que desea modificar: "));
-							int tipo = Integer.parseInt(input("1. Agregar Ingrediente\n2. Eliminar Ingrediente"));
+							int idIngrediente = Integer.parseInt(input("Ingrese el código del ingrediente que desea modificar\n"));
+							int tipo = Integer.parseInt(input("1. Agregar Ingrediente\n2. Eliminar Ingrediente\n"));
 							if (tipo == 1)
 							{
 								restaurante.ejecutarPrepararProductoAjustado(idProducto, tipo, idIngrediente);
@@ -62,7 +62,7 @@ public class Aplicacion {
 							{
 								restaurante.ejecutarPrepararProductoAjustado(idProducto, tipo, idIngrediente);
 							}
-							int proseguirmod = Integer.parseInt(input("¿Continuar modificaciones?\n \t1. Sí\n\t2. No"));
+							int proseguirmod = Integer.parseInt(input("¿Continuar modificaciones?\n \t1. Sí\n\t2. No\n"));
 							if (proseguirmod != 1)
 							{
 								modificaciones = false;
@@ -76,11 +76,16 @@ public class Aplicacion {
 					}
 					System.out.println("Producto agregado");
 				}
-				else
+				else if ((idProducto > 200 && idProducto < 216) || (idProducto > 300 && idProducto < 304))
 				{
 					restaurante.ejecutarAgregarProducto(idProducto);
+					System.out.println("Producto agregado");
 				}
-				System.out.println("Producto agregado");
+				
+				else
+				{
+					System.out.println("Producto inválido");
+				}
 				
 			}
 			else if (opcion_seleccionada == 4)
@@ -90,12 +95,10 @@ public class Aplicacion {
 			}
 			else if (opcion_seleccionada == 5)
 			{
-				int idPedido = Integer.parseInt(input("Ingrese el ID del pedido que desea consultar: "));
+				int idPedido = Integer.parseInt(input("Ingrese el ID del pedido que desea consultar\n"));
 				String texto = restaurante.getPedidoxID(idPedido);
 				System.out.println(texto);
 			}
-		
-			
 			
 			else
 			{
@@ -158,7 +161,7 @@ public class Aplicacion {
 	{
 		try
 		{
-			System.out.print(mensaje + ": ");
+			System.out.print(mensaje);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			return reader.readLine();
 		}
