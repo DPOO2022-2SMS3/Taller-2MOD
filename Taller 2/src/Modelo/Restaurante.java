@@ -2,25 +2,19 @@ package Modelo;
 
 import java.io.BufferedReader;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import Modelo.Ingrediente;
-import Modelo.Pedido;
 
 public class Restaurante 
 {
 	private Pedido pedidoAct;
 	private ProductoAjustado productoAct;
 	private int contadorPedidos;
-	private Producto prod;
 	
 	private ArrayList<Ingrediente> ingredientesList;
 	private ArrayList<ProductoMenu> productosList;

@@ -24,24 +24,7 @@ public class ProductoAjustado implements Producto
 	private ArrayList<Ingrediente> ingredientesEliminados;
 	
 	private ArrayList<Ingrediente> ingredientesAgregados;
-	
-	/*
-	 * Supongo que es el nombre de los ingredientes
-	 */
-	
-	/*
-	 * Tambien voy a suponer que es el precio de los ingredientes
-	 */
-	private int precio;
-	
-	/*
-	 * Esto si no tengo ni idea
-	 */
-	private String TextoFactura;
-	
-	
-	//Falta asosiaciones agregados y eliminados hacia Ingredientes y base 1 hacia ProductoMenu
-	
+		
 	// ************************************************************************
 	// Constructores
 	// ************************************************************************

@@ -77,10 +77,12 @@ public class Pedido {
         String TextoFactura = "HAMBURGUESAS MACASE\n\nCliente: " + this.nombreCliente + 
         					  "\nDirección cliente: " +  this.direccionCliente +
         					  "\nID Pedido: " + this.idPedido +
+        					  "\nNumero Pedido: " + this.numeroPedidos +
         					  "\n\n PRODUCTOS\n" + textoProductos +
         					  "\n\nValor Neto: " + this.getPrecioNetoPedido() + 
         					  "\nValor IVA (19%): " + this.getPrecioIVAPedido() + 
         					  "\nTOTAL: " + this.getPrecioTotalPedido();
+        
         
 
         return TextoFactura;
