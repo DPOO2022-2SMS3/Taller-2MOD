@@ -21,6 +21,7 @@ public class Aplicacion {
 		boolean continuar = true;
 		while (continuar)
 		{
+			
 			System.out.println("\n1. Mostrar el menú");
 			System.out.println("2. Iniciar un nuevo pedido");
 			System.out.println("3. Agregar un elemento a un pedido");
@@ -45,7 +46,7 @@ public class Aplicacion {
 			else if (opcion_seleccionada == 3 && pedido==true)
 			{
 				int idProducto = Integer.parseInt(input("Ingrese el código del producto que desea agregar\n"));
-				if (idProducto > 100 && idProducto < 123)
+				if (idProducto > 100 && idProducto < 120)
 				{
 					int ajuste = Integer.parseInt(input("¿Modificar Producto?\n \t1. Sí\n\t2. No\n"));
 					if (ajuste == 1)
@@ -79,7 +80,7 @@ public class Aplicacion {
 				}
 			
 				
-				else if ((idProducto > 200 && idProducto < 216) || (idProducto > 300 && idProducto < 304))
+				else if ((idProducto > 200 && idProducto < 216) || (idProducto > 300 && idProducto < 304) ||(idProducto > 400 && idProducto < 404))
 				{
 					restaurante.ejecutarAgregarProducto(idProducto);
 					System.out.println("Producto agregado");
@@ -141,9 +142,6 @@ public class Aplicacion {
 		System.out.println("\t117 - papas grandes: 6900");
 		System.out.println("\t118 - papas en casco medianas: 5500");
 		System.out.println("\t119 - papas en casco grandes: 6900");
-		System.out.println("\t120 - agua cristal sin gas: 5000");
-		System.out.println("\t121 - agua cristal con gas: 5000");
-		System.out.println("\t122 - gaseosa: 5000");
 		System.out.println("\n2. INGREDIENTES");
 		System.out.println("\t201 - lechuga: 1000");
 		System.out.println("\t202 - tomate: 1000");
@@ -164,6 +162,10 @@ public class Aplicacion {
 		System.out.println("\t301 - combo corral (corral, papas medianas, gaseosa): 22050");
 		System.out.println("\t302 - combo corral queso (corral queso, papas medianas, gaseosa): 23850");
 		System.out.println("\t303 - combo todoterreno (todoterreno, papas grandes, gaseosa): 34317");
+		System.out.println("\n4. BEBIDAS");
+		System.out.println("\t401 - agua cristal sin gas: 5000");
+		System.out.println("\t402 - agua cristal con gas: 5000");
+		System.out.println("\t403 - gaseosa: 5000");
 	}
 	
 	public String input(String mensaje)

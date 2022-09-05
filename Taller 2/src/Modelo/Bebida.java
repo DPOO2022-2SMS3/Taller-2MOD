@@ -1,6 +1,6 @@
 package Modelo;
 
-public class Bebida 
+public class Bebida extends ProductoMenu
 {
 
 	//****************************
@@ -14,17 +14,31 @@ public class Bebida
 	//****************************
 	//Constructor
 	
-	public Bebida(String nombre, int precio, int id, int calorias) 
+	public Bebida(String nombre, int precioBase, int id, int calorias) 
 	{
-		this.nombre = nombre;
-		this.precio = precio;
-		this.id = id;
-		this.calorias =  calorias;
+		super(nombre, precioBase, id, calorias);
 	}
 
-	public String getNombre() {
-		// TODO Auto-generated method stub
+	public String getNombre() 
+	{
 		return nombre;
+	}
+
+	public int getPrecio() {
+		return precio;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public int getCalorias() {
+		return calorias;
+	}
+	
+	public String generarTextoFactura()
+	{
+		return ("\t" + this.getNombre() + "\t\t\t" + this.getPrecio() + "\t" + this.getCalorias() + "cal\n");
 	}
 	
 		

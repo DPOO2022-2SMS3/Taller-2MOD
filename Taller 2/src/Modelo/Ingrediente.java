@@ -32,18 +32,19 @@ public class Ingrediente
 	// ************************************************************************
 	// Constructores
 	// ************************************************************************
-
+	private int calorias;
 	
 	/**
 	 * Construye un nuevo ingrediente e inicializa sus 
 	 * atributos con la información de los parámetros. 
 	 * @param id 
 	 */
-	public Ingrediente(String nombre, int costoAdicional, int id) 
+	public Ingrediente(String nombre, int costoAdicional, int id, int calorias) 
 	{
 		this.nombre = nombre;
 		this.costoAdicional = costoAdicional;
 		this.setId(id);
+		this.calorias = calorias;
 	}
 	
 	
@@ -79,6 +80,21 @@ public class Ingrediente
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+
+	public int getCalorias() {
+		return calorias;
+	}
+
+
+	public void setCalorias(int calorias) {
+		this.calorias = calorias;
+	}
+
+
+	public void setCostoAdicional(int costoAdicional) {
+		this.costoAdicional = costoAdicional;
 	}
 
 }

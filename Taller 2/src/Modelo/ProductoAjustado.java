@@ -60,21 +60,42 @@ public class ProductoAjustado implements Producto
 		}
 		return total;
 	}
+	
+	public int getCalorias() 
+	{
+		int total = productoBase.getCalorias();
+		for (int i = this.ingredientesAgregados.size() - 1; i >= 0; i--)
+		{
+			Ingrediente unIngrediente = ingredientesAgregados.get(i);
+			total = total + unIngrediente.getCalorias();
+		}
+		for (int i = this.ingredientesAgregados.size() - 1; i >= 0; i--)
+		{
+			Ingrediente unIngrediente = ingredientesEliminados.get(i);
+			total = total - unIngrediente.getCalorias();
+		}
+		
+		return total;
+	}
 
 
 	public String generarTextoFactura() 
 	{
 		String texto = "\t";
-		texto = texto + productoBase.getNombre() + "\t\t\t" + productoBase.getPrecio() + "\n";
+		texto = texto + productoBase.getNombre() + "\t\t\t" + productoBase.getPrecio() + 
+				"\t" + productoBase.getCalorias() + "cal\n";
 		for (int i = this.ingredientesAgregados.size() - 1; i >= 0; i--)
 		{
 			Ingrediente unIngrediente = ingredientesAgregados.get(i);
-			texto = texto + "\t\t+ " + unIngrediente.getNombre() + "\t" + unIngrediente.getCostoAdicional()+ "\n";
+			texto = texto + "\t\t+ " + unIngrediente.getNombre() +
+					            "\t" + unIngrediente.getCostoAdicional() + 
+					            "\t" + unIngrediente.getCalorias() + "cal\n";
 		}
 		for (int i = this.ingredientesEliminados.size() - 1; i >= 0; i--)
 		{
 			Ingrediente unIngrediente = ingredientesEliminados.get(i);
-			texto = texto + "\t\t- " + unIngrediente.getNombre() + "\n";
+			texto = texto + "\t\t- " + unIngrediente.getNombre() + 
+					            "\t" + unIngrediente.getCalorias() + "cal\n";
 		}
 		return texto;
 	}
@@ -98,8 +119,6 @@ public class ProductoAjustado implements Producto
 		this.ingredientesAgregados = ingredientesAgregados;
 	}
 
-
-	@Override
 	public int getId() 
 	{
 		return productoBase.getId();

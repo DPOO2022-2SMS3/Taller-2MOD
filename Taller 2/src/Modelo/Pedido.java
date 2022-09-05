@@ -65,6 +65,17 @@ public class Pedido {
         return precioTotal;
     }
     
+    private int getCaloriasTotales() 
+    {
+    	int neto = 0;
+    	for (int i = this.productos.size() - 1; i >= 0; i--)
+		{
+			Producto unProducto = productos.get(i);
+			neto = neto + unProducto.getCalorias();
+		}
+    	return neto;
+    }
+    
     protected String generarTextoFactura() 
     {
     	String textoProductos = "";
@@ -79,6 +90,7 @@ public class Pedido {
         					  "\nID Pedido: " + this.idPedido +
         					  "\nNumero Pedido: " + this.numeroPedidos +
         					  "\n\n PRODUCTOS\n" + textoProductos +
+        					  "\n\nCalorias Totales: " + this.getCaloriasTotales() + 
         					  "\n\nValor Neto: " + this.getPrecioNetoPedido() + 
         					  "\nValor IVA (19%): " + this.getPrecioIVAPedido() + 
         					  "\nTOTAL: " + this.getPrecioTotalPedido();
@@ -90,7 +102,7 @@ public class Pedido {
     
     public void guardarFactura() throws IOException
     {
-        String ruta = "Data/Facturas/" + this.idPedido + ".txt";
+        String ruta = "Taller 2/Data/Facturas/" + this.idPedido + ".txt";
         String contenido = this.generarTextoFactura();
         File file = new File(ruta);
             // Si el archivo no existe es creado

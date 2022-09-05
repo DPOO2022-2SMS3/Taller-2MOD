@@ -49,7 +49,6 @@ public class Combo implements Producto
 		{
 			ProductoMenu unProducto = productos.get(i);
 			total = total + unProducto.getPrecio();
-			
 		}
 		total = total - (total * this.descuento / 100);
 		
