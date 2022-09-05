@@ -8,13 +8,15 @@ public class Combo implements Producto
 	private String nombreCombo;
 	private int id;
 	private ArrayList<ProductoMenu> productos;
+	private int calorias;
 	
-	public Combo(String nombre, int descuento, int id, ArrayList<ProductoMenu> itemsCombo) 
+	public Combo(String nombre, int descuento, int id, ArrayList<ProductoMenu> itemsCombo, int calorias) 
 	{
 		this.nombreCombo = nombre;
 		this.descuento = descuento;
 		this.id = id;
 		this.productos = itemsCombo;
+		this.calorias = calorias;
 	}
 	
 	
@@ -72,16 +74,22 @@ public class Combo implements Producto
 		this.productos = productos;
 	}
 
-
-
 	public int getId() {
 		return id;
 	}
 
-
-
 	public void setId(int id) {
 		this.id = id;
+	}
+
+
+	public int getCalorias() {
+		return calorias;
+	}
+
+
+	public void setCalorias(int calorias) {
+		this.calorias = calorias;
 	}
 	
 }

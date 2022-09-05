@@ -26,7 +26,7 @@ public class Restaurante
 	public Restaurante() 
 	{
 		this.contadorPedidos = 0;
-		ProductoMenu temp = new ProductoMenu(null, 0, 0);
+		ProductoMenu temp = new ProductoMenu(null, 0, 0, 0);
 		this.productoAct = new ProductoAjustado(temp);
 		this.pedidos = new HashMap<>();
 	}
@@ -105,7 +105,22 @@ public class Restaurante
     	}
     	 return elCombo;
 	}
-
+    
+    public static Bebida getBebida(ArrayList<Bebida> bebidas, String nombreBebida)
+    {
+    	Bebida laBebida = null;
+    	
+    	for (int i = bebidas.size()-1; i>= 0 && laBebida == null; i--)
+    	{
+	    	 Bebida unaBebida = bebidas.get(i);
+	    	 if (unaBebida.getNombre() == nombreBebida)
+	    	 {
+	    		 laBebida = unaBebida;
+    	     }
+    	 
+    	}
+    	 return laBebida;
+    }
 
 
 	public void cargarInformacionRestaurante() throws FileNotFoundException, IOException 
@@ -113,10 +128,12 @@ public class Restaurante
     	String archivoMenu = "Data/menu.txt";
     	String archivoIngredientes = "Data/ingredientes.txt";
     	String archivoCombos = "Data/combos.txt";
+    	String archivoBebidas = "Data/bebidas.txt";
     	
 		cargarIngredientes(archivoIngredientes);    	
     	cargarMenu(archivoMenu);
 		cargarCombos(archivoCombos, productosList);
+		cargarBebidas(archivoBebidas);
 		
     }
 
@@ -132,6 +149,7 @@ public class Restaurante
     		String[] partes = linea.split(";");
     		String nombreIngrediente = partes[0]; 
     		int precio = Integer.parseInt(partes[1]);
+    		int calorias = Integer.parseInt(partes[2]);
     		
     		Ingrediente ElIngrediente = getIngredientes(ingredientes, nombreIngrediente);
     		
@@ -162,13 +180,14 @@ public class Restaurante
     		String[] partes = linea.split(";");
     		String nombreProducto = partes[0]; 
     		int precio = Integer.parseInt(partes[1]);
+    		int calorias = Integer.parseInt(partes[2]);
     		
     		ProductoMenu ElProducto = getMenuBase(productos, nombreProducto);
     		
     		if (ElProducto == null)
     		{
     			id = id + 1;
-    			ElProducto = new ProductoMenu(nombreProducto, precio, id);
+    			ElProducto = new ProductoMenu(nombreProducto, precio, id, calorias);
     			productos.add(ElProducto);
     		}
     		
@@ -201,6 +220,7 @@ public class Restaurante
         		String nombreHamburguesa = partes[2];
         		String nombrePapas = partes[3];
         		String nombreBebida = partes[4];
+        		int calorias = Integer.parseInt(partes[5]);
         		ProductoMenu hamburguesa = null;
         		ProductoMenu papas = null;
         		ProductoMenu bebida = null;
@@ -225,7 +245,7 @@ public class Restaurante
         		
         		
     			id = id + 1;
-    			ElCombo = new Combo(nombreCombo, descuento, id, itemsCombo);
+    			ElCombo = new Combo(nombreCombo, descuento, id, itemsCombo, calorias);
     			combos.add(ElCombo);
     			
     			ElCombo.agregarItemACombo(hamburguesa);
@@ -237,6 +257,36 @@ public class Restaurante
     	}
     	br.close();
 		setCombosList(combos);
+    }
+    
+    private void cargarBebidas(String archivoBebidas) throws IOException
+    {
+    	BufferedReader br = new BufferedReader(new FileReader(archivoBebidas));
+    	String linea = br.readLine();
+    	ArrayList<Bebida> bebidas = new ArrayList<>();
+    	int id = 400;
+    	
+    	while (linea != null)
+    	{
+    		String[] partes = linea.split(";");
+    		String nombreBebida = partes[0]; 
+    		int precio = Integer.parseInt(partes[1]);
+    		int calorias = Integer.parseInt(partes[2]);
+    		
+    		Bebida laBebida = getBebida(bebidas, nombreBebida);
+    		
+    		if (laBebida == null)
+    		{
+    			id = id + 1;
+    			laBebida = new Bebida(nombreBebida, precio, id, calorias);
+    			bebidas.add(laBebida);
+    		}
+    		
+    		linea = br.readLine();
+    	}
+    	
+    	br.close();
+    	    	
     }
 
 

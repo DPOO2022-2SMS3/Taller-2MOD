@@ -7,14 +7,16 @@ public class ProductoMenu implements Producto
 	private String nombre;
 	private int precioBase;
 	private int id;
+	private int calorias;
 	
 	// Constructor
 	
-	public ProductoMenu(String nombre, int precioBase, int id) 
+	public ProductoMenu(String nombre, int precioBase, int id, int calorias) 
 	{
 		this.nombre = nombre;
 		this.precioBase = precioBase;
 		this.setId(id);
+		this.calorias = calorias;
 	}
 	
 	// Consultores y Modificadores
@@ -47,4 +49,14 @@ public class ProductoMenu implements Producto
 	{
 		return ("\t" + this.getNombre() + "\t\t\t" + this.getPrecio());
 	}
+
+	public int getCalorias() {
+		return calorias;
+	}
+
+	public void setCalorias(int calorias) {
+		this.calorias = calorias;
+	}
+	
+	
 }
