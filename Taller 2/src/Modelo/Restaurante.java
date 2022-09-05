@@ -23,6 +23,7 @@ public class Restaurante
 	private ArrayList<Combo> combosList;
 	
 	private Map<Integer, Pedido> pedidos;
+	private ArrayList<Pedido> pedidosList;
 	
 	
 	public Restaurante() 
@@ -31,6 +32,7 @@ public class Restaurante
 		ProductoMenu temp = new ProductoMenu(null, 0, 0, 0);
 		this.productoAct = new ProductoAjustado(temp);
 		this.pedidos = new HashMap<>();
+		this.pedidosList = new ArrayList<>();
 	}
 	
 	
@@ -42,11 +44,15 @@ public class Restaurante
 		setPedidoAct(pedidoAct);
     }
 
-    public void cerrarYGuardarPedido() throws IOException 
+    public Boolean cerrarYGuardarPedido() throws IOException 
     {
     	pedidoAct.guardarFactura();
+    	Boolean repetido = this.checkRepetidos();
     	this.pedidos.put(pedidoAct.getIdPedido(), pedidoAct);
+    	pedidosList.add(pedidoAct);
     	pedidoAct = null;
+    	
+    	return repetido;
     }
 
     /**
@@ -218,7 +224,7 @@ public class Restaurante
     		
     		if (ElCombo == null)
     		{
-    			ArrayList<ProductoMenu> itemsCombo = new ArrayList<>();
+    			ArrayList<Producto> itemsCombo = new ArrayList<>();
         		String nombreHamburguesa = partes[2];
         		String nombrePapas = partes[3];
         		String nombreBebida = partes[4];
@@ -242,9 +248,10 @@ public class Restaurante
         		
         		for (int i = bebidas.size() - 1; i >= 0 && (bebida == null); i--)
         		{
+        			
         			Bebida unaBebida = bebidas.get(i);
-        					
-        			if (unaBebida.getNombre() == nombreBebida)
+        			
+        			if (unaBebida.getNombre().equals(nombreBebida))
         			{
         				bebida = unaBebida;
         			}
@@ -449,5 +456,54 @@ public class Restaurante
 		
 	}
 	
+	private Boolean checkRepetidos()
+	{
+		Boolean repeated = false;
+//		System.out.println(this.pedidosList);
+	
+		for (int i = this.pedidosList.size() - 1; i >= 0 && repeated == false; i--)
+		{
+			Pedido unPedido = this.pedidosList.get(i);
+			
+			System.out.println("****");
+			repeated = checkEquals(unPedido.getProductos(), this.pedidoAct.getProductos());
+			
+//			if (unPedido.getProductos() == this.pedidoAct.getProductos())
+//			{
+//				repeated = true;
+//				System.out.println(repeated);
+//			}
+		}
+		return repeated;
 
+	}
+
+	private Boolean checkEquals(ArrayList<Producto> pedido1, ArrayList<Producto> pedido2)
+	{
+		System.out.println("++++++");
+		System.out.println(pedido1 == pedido2);
+		Boolean repeated = false;
+		
+		for (int i = pedido1.size() - 1; i >= 0 && repeated == false; i--)
+		{
+			Producto unProducto1 = pedido1.get(i);
+			for (int j = pedido2.size() - 1; j >= 0 && repeated == false; i--)
+			{
+				Producto unProducto2 = pedido2.get(j);
+				if (unProducto1.equals(unProducto2))
+				{
+					System.out.println("-----");
+					System.out.println(repeated);
+					repeated = true;
+				}
+
+			}
+			
+		}
+		
+		return repeated;
+	}
 }
+	
+	
+	

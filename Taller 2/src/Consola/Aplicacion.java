@@ -99,7 +99,11 @@ public class Aplicacion {
 	
 			else if (opcion_seleccionada == 4)
 			{
-				restaurante.cerrarYGuardarPedido();
+				Boolean repetido = restaurante.cerrarYGuardarPedido();
+				if (repetido == true)
+				{
+					System.out.println("Un pedido idéntico ya había sido ordenado");
+				}
 				System.out.println("Pedido Cerrado");
 				pedido = false;
 			}

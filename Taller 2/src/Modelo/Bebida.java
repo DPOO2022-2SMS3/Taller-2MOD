@@ -1,6 +1,6 @@
 package Modelo;
 
-public class Bebida extends ProductoMenu
+public class Bebida implements Producto
 {
 
 	//****************************
@@ -16,12 +16,15 @@ public class Bebida extends ProductoMenu
 	
 	public Bebida(String nombre, int precioBase, int id, int calorias) 
 	{
-		super(nombre, precioBase, id, calorias);
+		this.nombre = nombre;
+		this.precio = precioBase;
+		this.id = id;
+		this.calorias = calorias;
 	}
 
 	public String getNombre() 
 	{
-		return nombre;
+		return this.nombre;
 	}
 
 	public int getPrecio() {

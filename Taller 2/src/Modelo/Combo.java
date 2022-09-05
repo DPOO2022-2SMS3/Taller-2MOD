@@ -7,10 +7,10 @@ public class Combo implements Producto
 	private int descuento;
 	private String nombreCombo;
 	private int id;
-	private ArrayList<ProductoMenu> productos;
+	private ArrayList<Producto> productos;
 	private int calorias;
 	
-	public Combo(String nombre, int descuento, int id, ArrayList<ProductoMenu> itemsCombo, int calorias) 
+	public Combo(String nombre, int descuento, int id, ArrayList<Producto> itemsCombo, int calorias) 
 	{
 		this.nombreCombo = nombre;
 		this.descuento = descuento;
@@ -37,7 +37,7 @@ public class Combo implements Producto
 //	{
 //
 //	}
-	public void agregarItemACombo(ProductoMenu itemCombo)
+	public void agregarItemACombo(Producto itemCombo)
 	{
 		productos.add(itemCombo);
 	}
@@ -47,7 +47,7 @@ public class Combo implements Producto
 		int total = 0;
 		for (int i = this.productos.size() - 1; i >= 0; i--)
 		{
-			ProductoMenu unProducto = productos.get(i);
+			Producto unProducto = productos.get(i);
 			total = total + unProducto.getPrecio();
 		}
 		total = total - (total * this.descuento / 100);
@@ -57,7 +57,7 @@ public class Combo implements Producto
 	
 	public String generarTextoFactura()
 	{
-		return ("\t" + this.getNombre() + "\t\t\t" + this.getPrecio());
+		return ("\t" + this.getNombre() + "\t\t\t" + this.getPrecio()) + "\t" + this.getCalorias() + "cal";
 	}
 	
 	public String getNombre()
@@ -65,11 +65,11 @@ public class Combo implements Producto
 		return nombreCombo;
 	}
 	
-	public ArrayList<ProductoMenu> getProductos() {
+	public ArrayList<Producto> getProductos() {
 		return productos;
 	}
 	
-	public void setProductos(ArrayList<ProductoMenu> productos) {
+	public void setProductos(ArrayList<Producto> productos) {
 		this.productos = productos;
 	}
 

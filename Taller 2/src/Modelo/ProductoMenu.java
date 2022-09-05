@@ -47,7 +47,7 @@ public class ProductoMenu implements Producto
 	
 	public String generarTextoFactura()
 	{
-		return ("\t" + this.getNombre() + "\t\t\t" + this.getPrecio() + "\t" + this.getCalorias() + "cal\n");
+		return ("\t" + this.getNombre() + "\t\t\t" + this.getPrecio() + "\t" + this.getCalorias() + "cal");
 	}
 
 	public int getCalorias() {

@@ -31,12 +31,18 @@ public class Pedido {
     	
     	productos.add(nuevoItem);
     }
+   
     
     // Consultores y Modificadores
 
     public int getIdPedido() 
     {
         return idPedido;
+    }
+    
+    public ArrayList<Producto> getProductos() 
+    {
+        return productos;
     }
 
     private int getPrecioNetoPedido() 
