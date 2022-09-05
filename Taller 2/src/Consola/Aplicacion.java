@@ -105,7 +105,7 @@ public class Aplicacion {
 					System.out.println("Un pedido idéntico ya había sido ordenado");
 				}
 				System.out.println("Pedido Cerrado");
-				pedido = false;
+				 pedido = false;
 			}
 			else if (opcion_seleccionada == 5)
 			{
