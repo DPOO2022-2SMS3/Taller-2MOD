@@ -480,15 +480,12 @@ public class Restaurante
 	{
 		boolean repeated = false;
 		ArrayList<Producto> productosAct = this.pedidoAct.getProductos();
-		sort(productosAct);
-//		System.out.println(this.pedidosList);
-	
 		for (int i = this.pedidosList.size() - 1; i >= 0 && repeated == false; i--)
 		{
 			Pedido unPedido = this.pedidosList.get(i);
 			ArrayList<Producto> productosList = unPedido.getProductos();
-			sort(productosList);
-//			repeated = checkEquals(productosAct, productosList);
+			
+			repeated = checkEqualsPedido(productosAct, productosList);
 		}
 		return repeated;
 
@@ -497,29 +494,35 @@ public class Restaurante
 	public static void sort(ArrayList<Producto> list) {
 		  
         list.sort((o1, o2)
-                  -> o1.getNombre().compareTo(
-                      o2.getNombre()));
+                  -> o1.getNombre().compareTo(o2.getNombre()));
     }
 
-//	private boolean checkEquals(ArrayList<Producto> pedido1, ArrayList<Producto> pedido2)
-//	{
-//		boolean repeated = false;
-//		
-//		for (int i = pedido1.size() - 1; i >= 0 && repeated == false; i--)
-//		{
-//			Producto unProducto1 = pedido1.get(i);
-//			for (int j = pedido2.size() - 1; j >= 0 && repeated == false; i--)
-//			{
-//				Producto unProducto2 = pedido2.get(j);
-//				boolean parameter = unProducto1.equals(unProducto2);
-//				if (parameter == true)
-//				{
-//					repeated = true;
-//				}
-//			}	
-//		}
-//		return repeated;
-//	}
+	private boolean checkEqualsPedido(ArrayList<Producto> pedido1, ArrayList<Producto> pedido2)
+	{
+		boolean repeated = true;
+		
+		if (pedido1.size() != pedido2.size())
+		{
+			repeated = false;
+		}
+		else
+		{
+			sort(pedido1);
+			sort(pedido2);
+			for (int i = pedido1.size() - 1; i >= 0 && repeated == true; i--)
+			{
+				Producto unProducto1 = pedido1.get(i);
+				Producto unProducto2 = pedido2.get(i);
+				String F1 = unProducto1.generarTextoFactura();
+				String F2 = unProducto2.generarTextoFactura();
+				if (F1.equals(F2) == false)
+				{
+					repeated = false;
+				}	
+			}
+		}
+		return repeated;
+	}
 }
 	
 	

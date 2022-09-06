@@ -104,6 +104,10 @@ public class Aplicacion {
 				{
 					System.out.println("Un pedido idéntico ya había sido ordenado");
 				}
+				else
+				{
+					System.out.println("Este pedido no ha sido ordenado antes");
+				}
 				System.out.println("Pedido Cerrado");
 				 pedido = false;
 			}
@@ -194,8 +198,5 @@ public class Aplicacion {
 		Aplicacion consola = new Aplicacion();
 		consola.ejecutarAplicacion();
 	}
-	
-	
-	
 
 }

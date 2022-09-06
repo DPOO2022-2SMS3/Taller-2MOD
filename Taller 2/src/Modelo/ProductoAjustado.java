@@ -69,7 +69,7 @@ public class ProductoAjustado implements Producto
 			Ingrediente unIngrediente = ingredientesAgregados.get(i);
 			total = total + unIngrediente.getCalorias();
 		}
-		for (int i = this.ingredientesAgregados.size() - 1; i >= 0; i--)
+		for (int i = this.ingredientesEliminados.size() - 1; i >= 0; i--)
 		{
 			Ingrediente unIngrediente = ingredientesEliminados.get(i);
 			total = total - unIngrediente.getCalorias();
@@ -81,6 +81,8 @@ public class ProductoAjustado implements Producto
 
 	public String generarTextoFactura() 
 	{
+		sort(ingredientesAgregados);
+		sort(ingredientesEliminados);
 		String texto = "\t";
 		texto = texto + productoBase.getNombre() + "\t\t\t" + productoBase.getPrecio() + 
 				"\t" + productoBase.getCalorias() + "cal\n";
@@ -123,5 +125,13 @@ public class ProductoAjustado implements Producto
 	{
 		return productoBase.getId();
 	}
+	
+	public static void sort(ArrayList<Ingrediente> list) 
+	{
+		  
+        list.sort((o1, o2)
+                  -> o1.getNombre().compareTo(
+                      o2.getNombre()));
+    }
 
 }
