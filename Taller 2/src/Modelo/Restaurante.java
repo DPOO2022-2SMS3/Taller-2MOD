@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,8 +51,6 @@ public class Restaurante
     	Boolean repetido = this.checkRepetidos();
     	this.pedidos.put(pedidoAct.getIdPedido(), pedidoAct);
     	pedidosList.add(pedidoAct);
-    	pedidoAct = null;
-    	
     	return repetido;
     }
 
@@ -368,6 +367,8 @@ public class Restaurante
 	public void ejecutarAgregarProductoAjustado()
 	{
 		pedidoAct.agregarProducto(productoAct);
+		ProductoMenu temp = new ProductoMenu(null, 0, 0, 0);
+		this.productoAct = new ProductoAjustado(temp);
 	}
 	
 	public Producto getProducto(int idProducto)
@@ -478,8 +479,11 @@ public class Restaurante
 	
 	private boolean checkRepetidos()
 	{
+		
 		boolean repeated = false;
+		
 		ArrayList<Producto> productosAct = this.pedidoAct.getProductos();
+		
 		for (int i = this.pedidosList.size() - 1; i >= 0 && repeated == false; i--)
 		{
 			Pedido unPedido = this.pedidosList.get(i);
@@ -507,8 +511,10 @@ public class Restaurante
 		}
 		else
 		{
-			sort(pedido1);
-			sort(pedido2);
+			pedido1.sort((o1, o2)
+	                  -> o1.getNombre().compareTo(o2.getNombre()));
+			pedido2.sort((o1, o2)
+	                  -> o1.getNombre().compareTo(o2.getNombre()));
 			for (int i = pedido1.size() - 1; i >= 0 && repeated == true; i--)
 			{
 				Producto unProducto1 = pedido1.get(i);

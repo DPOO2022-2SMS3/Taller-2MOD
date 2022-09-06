@@ -21,6 +21,8 @@ public class ProductoAjustado implements Producto
 	 */
 	private ProductoMenu productoBase; 
 	
+	private String textoFactura;
+	
 	private ArrayList<Ingrediente> ingredientesEliminados;
 	
 	private ArrayList<Ingrediente> ingredientesAgregados;
@@ -102,6 +104,7 @@ public class ProductoAjustado implements Producto
 		return texto;
 	}
 	
+	
 	public ArrayList<Ingrediente> getIngredientesEliminados() {
 		return ingredientesEliminados;
 	}
@@ -133,5 +136,15 @@ public class ProductoAjustado implements Producto
                   -> o1.getNombre().compareTo(
                       o2.getNombre()));
     }
+
+
+	public String getTextoFactura() {
+		return textoFactura;
+	}
+
+
+	public void setTextoFactura(String textoFactura) {
+		this.textoFactura = this.generarTextoFactura();
+	}
 
 }

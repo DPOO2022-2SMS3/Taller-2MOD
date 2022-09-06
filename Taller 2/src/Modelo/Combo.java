@@ -9,6 +9,7 @@ public class Combo implements Producto
 	private int id;
 	private ArrayList<Producto> productos;
 	private int calorias;
+	private String textoFactura;
 	
 	public Combo(String nombre, int descuento, int id, ArrayList<Producto> itemsCombo, int calorias) 
 	{
@@ -89,6 +90,15 @@ public class Combo implements Producto
 
 	public void setCalorias(int calorias) {
 		this.calorias = calorias;
+	}
+	
+	public String getTextoFactura() {
+		return textoFactura;
+	}
+
+
+	public void setTextoFactura(String textoFactura) {
+		this.textoFactura = this.generarTextoFactura();
 	}
 	
 }

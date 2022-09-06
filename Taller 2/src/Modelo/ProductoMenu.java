@@ -8,6 +8,7 @@ public class ProductoMenu implements Producto
 	private int precioBase;
 	private int id;
 	private int calorias;
+	private String textoFactura;
 	
 	// Constructor
 	
@@ -56,6 +57,14 @@ public class ProductoMenu implements Producto
 
 	public void setCalorias(int calorias) {
 		this.calorias = calorias;
+	}
+	public String getTextoFactura() {
+		return textoFactura;
+	}
+
+
+	public void setTextoFactura(String textoFactura) {
+		this.textoFactura = this.generarTextoFactura();
 	}
 	
 	

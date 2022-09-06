@@ -7,4 +7,5 @@ public interface Producto
 	public String generarTextoFactura();
 	public int getId();
 	public int getCalorias();
+	public String getTextoFactura();
 }

@@ -10,6 +10,7 @@ public class Bebida implements Producto
 	private int precio;
 	private int id;
 	private int calorias;
+	private String textoFactura;
 		
 	//****************************
 	//Constructor
@@ -42,6 +43,15 @@ public class Bebida implements Producto
 	public String generarTextoFactura()
 	{
 		return ("\t" + this.getNombre() + "\t\t\t" + this.getPrecio() + "\t" + this.getCalorias() + "cal\n");
+	}
+	
+	public String getTextoFactura() {
+		return textoFactura;
+	}
+
+
+	public void setTextoFactura(String textoFactura) {
+		this.textoFactura = this.generarTextoFactura();
 	}
 	
 		
